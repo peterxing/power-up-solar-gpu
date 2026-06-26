@@ -3,1005 +3,1005 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Power Up! — Solar, Batteries &amp; Home AI Clusters | TAFE NSW</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E" />
+<title>Solar Install 3D — Build a Rooftop Solar &amp; Battery System | TAFE NSW</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E" />
 <script>
   (() => {
     const param = new URLSearchParams(window.location.search).get("scoutTheme");
-    const theme =
-      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const theme = param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     document.documentElement.setAttribute("data-theme", theme);
   })();
 </script>
 <style>
 :root {
   color-scheme: light;
-  --cp-bg: #f7f4ef;
-  --cp-bg-elevated: #fcfbf8;
-  --cp-surface: #ffffff;
-  --cp-surface-soft: #f5f5f5;
-  --cp-border: #dedede;
-  --cp-border-strong: #919191;
-  --cp-text: #242424;
-  --cp-text-muted: #5c5c5c;
-  --cp-text-soft: #6f6f6f;
-  --cp-accent: #b11f4b;
-  --cp-accent-hover: #9a1a41;
-  --cp-accent-soft: rgba(177, 31, 75, 0.08);
-  --cp-accent-fg: #ffffff;
-  --cp-success: #16a34a;
-  --cp-danger: #dc2626;
-  --cp-warning: #f59e0b;
-  --cp-link: #0078d4;
-  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-  --cp-overlay: rgba(255, 255, 255, 0.8);
-  --cp-panel: rgba(255, 255, 255, 0.86);
-  --cp-panel-strong: rgba(255, 255, 255, 0.96);
-  --cp-sheen: rgba(255, 255, 255, 0.55);
-  --cp-highlight: rgba(177, 31, 75, 0.12);
+  --cp-bg: #f7f4ef; --cp-bg-elevated: #fcfbf8; --cp-surface: #ffffff; --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede; --cp-border-strong: #919191; --cp-text: #242424; --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f; --cp-accent: #b11f4b; --cp-accent-hover: #9a1a41; --cp-accent-soft: rgba(177,31,75,.08);
+  --cp-accent-fg: #ffffff; --cp-success: #16a34a; --cp-danger: #dc2626; --cp-warning: #f59e0b; --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0,0,0,.12); --cp-panel: rgba(255,255,255,.86); --cp-panel-strong: rgba(255,255,255,.96);
 }
 html[data-theme="dark"] {
   color-scheme: dark;
-  --cp-bg: #3d3b3a;
-  --cp-bg-elevated: #343231;
-  --cp-surface: #292929;
-  --cp-surface-soft: #2e2e2e;
-  --cp-border: #474747;
-  --cp-border-strong: #5f5f5f;
-  --cp-text: #dedede;
-  --cp-text-muted: #919191;
-  --cp-text-soft: #b0b0b0;
-  --cp-accent: #fd8ea1;
-  --cp-accent-hover: #fb7b91;
-  --cp-accent-soft: rgba(253, 142, 161, 0.14);
-  --cp-accent-fg: #1a1a1a;
-  --cp-success: #4ade80;
-  --cp-danger: #f87171;
-  --cp-warning: #fbbf24;
-  --cp-link: #4da6ff;
-  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-  --cp-overlay: rgba(41, 41, 41, 0.88);
-  --cp-panel: rgba(41, 41, 41, 0.72);
-  --cp-panel-strong: rgba(41, 41, 41, 0.96);
-  --cp-sheen: rgba(255, 255, 255, 0.04);
-  --cp-highlight: rgba(253, 142, 161, 0.12);
+  --cp-bg: #3d3b3a; --cp-bg-elevated: #343231; --cp-surface: #292929; --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747; --cp-border-strong: #5f5f5f; --cp-text: #dedede; --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0; --cp-accent: #fd8ea1; --cp-accent-hover: #fb7b91; --cp-accent-soft: rgba(253,142,161,.14);
+  --cp-accent-fg: #1a1a1a; --cp-success: #4ade80; --cp-danger: #f87171; --cp-warning: #fbbf24; --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0,0,0,.32); --cp-panel: rgba(41,41,41,.78); --cp-panel-strong: rgba(41,41,41,.96);
 }
-
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
 body {
-  background: var(--cp-bg);
-  color: var(--cp-text);
+  background: var(--cp-bg); color: var(--cp-text);
   font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
-  min-height: 100vh;
 }
+#stage { position: fixed; inset: 0; z-index: 0; touch-action: none; }
 .mono { font-family: Consolas, "Courier New", Courier, monospace; }
 
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 18px 64px; }
+/* ---- HUD ---- */
+.hud { position: fixed; z-index: 10; pointer-events: none; }
+.hud .panel { pointer-events: auto; }
 
-/* Header */
-header.app {
-  position: sticky; top: 0; z-index: 20;
-  background: var(--cp-panel-strong);
-  backdrop-filter: blur(10px);
+/* Top bar */
+#topbar {
+  top: 0; left: 0; right: 0;
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+  background: var(--cp-panel-strong); backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--cp-border);
 }
-.head-inner { max-width: 920px; margin: 0 auto; padding: 12px 18px; }
-.head-row { display: flex; align-items: center; gap: 12px; }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.02rem; }
-.brand .logo {
-  width: 34px; height: 34px; border-radius: 10px;
-  display: grid; place-items: center; font-size: 1.05rem;
-  background: var(--cp-accent); color: var(--cp-accent-fg);
-  box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
-}
-.brand small { display: block; font-weight: 500; font-size: 0.7rem; color: var(--cp-text-muted); letter-spacing: .04em; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: .98rem; }
+.brand .logo { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center;
+  font-size: 1rem; background: var(--cp-accent); color: var(--cp-accent-fg);
+  box-shadow: 0 0 2px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.14); }
+.brand small { display: block; font-weight: 500; font-size: .68rem; color: var(--cp-text-muted); letter-spacing: .03em; }
 .spacer { flex: 1; }
-.chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 11px; border-radius: 999px;
-  border: 1px solid var(--cp-border);
-  background: var(--cp-surface); font-size: 0.82rem; font-weight: 600;
-}
-.chip b { color: var(--cp-accent); }
-.icon-btn {
-  width: 34px; height: 34px; border-radius: 10px; cursor: pointer;
-  border: 1px solid var(--cp-border); background: var(--cp-surface);
-  color: var(--cp-text); font-size: 1rem; display: grid; place-items: center;
-}
+.stat { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px;
+  border: 1px solid var(--cp-border); background: var(--cp-surface); font-size: .82rem; font-weight: 600; }
+.stat b { color: var(--cp-accent); }
+.icon-btn { width: 32px; height: 32px; border-radius: 9px; cursor: pointer; border: 1px solid var(--cp-border);
+  background: var(--cp-surface); color: var(--cp-text); font-size: 1rem; display: grid; place-items: center; }
 .icon-btn:hover { border-color: var(--cp-border-strong); }
-.progress {
-  margin-top: 10px; height: 7px; border-radius: 999px;
-  background: var(--cp-surface-soft); border: 1px solid var(--cp-border); overflow: hidden;
-}
-.progress > span {
-  display: block; height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--cp-accent), var(--cp-accent-hover));
-  transition: width .45s cubic-bezier(.4,0,.2,1);
-}
-.stage-label { font-size: 0.74rem; color: var(--cp-text-muted); margin-top: 6px; letter-spacing: .03em; }
 
-/* Cards */
-.card {
-  background: var(--cp-surface);
-  border: 1px solid var(--cp-border);
-  border-radius: 16px;
-  padding: 26px;
-  margin-top: 22px;
-  box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
-  animation: rise .35s ease;
-}
-@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* Phase progress dots */
+#phasebar { top: 56px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; padding: 8px; }
+.dot { display: flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 999px; font-size: .76rem;
+  font-weight: 600; background: var(--cp-panel); border: 1px solid var(--cp-border); color: var(--cp-text-muted);
+  backdrop-filter: blur(8px); }
+.dot.active { color: var(--cp-accent-fg); background: var(--cp-accent); border-color: var(--cp-accent); }
+.dot.done { color: var(--cp-success); border-color: var(--cp-success); }
+.dot .n { font-weight: 800; }
+@media (max-width: 760px){ .dot .lbl { display:none; } }
 
-.stage-tag {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 0.78rem; font-weight: 700; letter-spacing: .03em;
-  color: var(--cp-accent);
-  background: var(--cp-accent-soft);
-  padding: 5px 12px; border-radius: 999px; margin-bottom: 14px;
-}
-h1 { font-size: 1.7rem; margin: 0 0 8px; line-height: 1.2; }
-h2.q-text { font-size: 1.28rem; margin: 4px 0 18px; line-height: 1.3; }
-.q-progress { font-size: 0.78rem; color: var(--cp-text-muted); font-weight: 600; margin-bottom: 6px; }
-p.lede { color: var(--cp-text-muted); font-size: 1.02rem; margin: 0 0 6px; }
-
-/* Buttons */
-.btn-primary, .btn-ghost {
-  font-family: inherit; font-size: 0.95rem; font-weight: 600;
-  padding: 11px 22px; border-radius: 0.625rem; cursor: pointer;
-  border: 1px solid transparent; transition: background .15s, transform .05s;
-}
+/* Instruction panel (bottom-left) */
+#instruct { left: 16px; bottom: 16px; width: min(380px, calc(100vw - 32px));
+  background: var(--cp-panel-strong); backdrop-filter: blur(12px); border: 1px solid var(--cp-border);
+  border-radius: 16px; padding: 18px 18px 16px; box-shadow: var(--cp-shadow); }
+#instruct .tag { display: inline-flex; align-items: center; gap: 7px; font-size: .74rem; font-weight: 700;
+  letter-spacing: .03em; color: var(--cp-accent); background: var(--cp-accent-soft); padding: 4px 11px;
+  border-radius: 999px; margin-bottom: 10px; }
+#instruct h2 { margin: 2px 0 6px; font-size: 1.15rem; line-height: 1.25; }
+#instruct p { margin: 0; font-size: .92rem; color: var(--cp-text-muted); }
+#instruct .live { margin-top: 10px; font-size: .9rem; font-weight: 600; min-height: 1.2em; }
+#instruct .live.ok { color: var(--cp-success); }
+#instruct .live.bad { color: var(--cp-danger); }
+#instruct .live.warn { color: var(--cp-warning); }
+.btn-row { display: flex; gap: 9px; margin-top: 14px; flex-wrap: wrap; }
+.btn-primary, .btn-ghost { font-family: inherit; font-size: .9rem; font-weight: 600; padding: 9px 18px;
+  border-radius: .6rem; cursor: pointer; border: 1px solid transparent; }
 .btn-primary { background: var(--cp-accent); color: var(--cp-accent-fg); }
 .btn-primary:hover { background: var(--cp-accent-hover); }
-.btn-primary:active { transform: translateY(1px); }
-.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary:disabled { opacity: .45; cursor: not-allowed; }
 .btn-ghost { background: var(--cp-surface); border-color: var(--cp-border); color: var(--cp-text); }
 .btn-ghost:hover { border-color: var(--cp-border-strong); }
-.row-end { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-.row-between { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-/* Options */
-.options { display: grid; gap: 11px; }
-.option {
-  text-align: left; font-family: inherit; font-size: 0.98rem;
-  padding: 14px 16px; border-radius: 0.625rem; cursor: pointer;
-  border: 1px solid var(--cp-border); background: var(--cp-surface-soft);
-  color: var(--cp-text); display: flex; gap: 11px; align-items: center;
-  transition: border-color .12s, background .12s, transform .05s;
-}
-.option:hover:not(:disabled) { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
-.option:active:not(:disabled) { transform: translateY(1px); }
-.option .key {
-  flex: none; width: 26px; height: 26px; border-radius: 7px;
-  display: grid; place-items: center; font-weight: 700; font-size: 0.82rem;
-  background: var(--cp-surface); border: 1px solid var(--cp-border);
-}
-.option.correct { border-color: var(--cp-success); background: color-mix(in srgb, var(--cp-success) 12%, var(--cp-surface)); }
-.option.correct .key { background: var(--cp-success); color: #fff; border-color: var(--cp-success); }
-.option.wrong { border-color: var(--cp-danger); background: color-mix(in srgb, var(--cp-danger) 12%, var(--cp-surface)); }
-.option.wrong .key { background: var(--cp-danger); color: #fff; border-color: var(--cp-danger); }
-.option:disabled { cursor: default; }
+/* Sim gauges (bottom-right, commissioning) */
+#gauges { right: 16px; bottom: 16px; width: 220px; background: var(--cp-panel-strong); backdrop-filter: blur(12px);
+  border: 1px solid var(--cp-border); border-radius: 16px; padding: 14px 16px; box-shadow: var(--cp-shadow); display: none; }
+#gauges h3 { margin: 0 0 8px; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; color: var(--cp-text-muted); }
+.gauge { margin: 9px 0; }
+.gauge .lab { display: flex; justify-content: space-between; font-size: .82rem; margin-bottom: 4px; }
+.gauge .lab b { color: var(--cp-accent); }
+.bar { height: 9px; border-radius: 999px; background: var(--cp-surface-soft); border: 1px solid var(--cp-border); overflow: hidden; }
+.bar > span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--cp-accent), var(--cp-accent-hover)); transition: width .25s; }
+.bar.sun > span { background: linear-gradient(90deg,#f6c453,#f59e0b); }
+.bar.batt > span { background: linear-gradient(90deg,#16a34a,#4ade80); }
+#clockLbl { font-size: .8rem; color: var(--cp-text-muted); text-align: center; margin-top: 2px; }
 
-/* Feedback */
-.feedback {
-  margin-top: 16px; padding: 14px 16px; border-radius: 0.625rem;
-  font-size: 0.94rem; border: 1px solid var(--cp-border);
-  animation: rise .25s ease;
-}
-.feedback.ok { border-color: var(--cp-success); background: color-mix(in srgb, var(--cp-success) 10%, var(--cp-surface)); }
-.feedback.bad { border-color: var(--cp-danger); background: color-mix(in srgb, var(--cp-danger) 10%, var(--cp-surface)); }
-.feedback strong { display: inline; }
-
-/* Order challenge */
-.slots { display: grid; gap: 9px; margin: 4px 0 18px; }
-.slot {
-  display: flex; align-items: center; gap: 12px; min-height: 52px;
-  border: 1.5px dashed var(--cp-border-strong); border-radius: 0.625rem;
-  padding: 8px 12px; background: var(--cp-surface-soft);
-}
-.slot .num {
-  flex: none; width: 28px; height: 28px; border-radius: 50%;
-  display: grid; place-items: center; font-weight: 700; font-size: 0.85rem;
-  background: var(--cp-accent); color: var(--cp-accent-fg);
-}
-.slot.filled { border-style: solid; border-color: var(--cp-border); background: var(--cp-surface); }
-.slot.ok { border-color: var(--cp-success); background: color-mix(in srgb, var(--cp-success) 10%, var(--cp-surface)); }
-.slot.no { border-color: var(--cp-danger); background: color-mix(in srgb, var(--cp-danger) 10%, var(--cp-surface)); }
-.chip-item {
-  font-family: inherit; font-size: 0.93rem; font-weight: 600;
-  padding: 9px 14px; border-radius: 0.625rem; cursor: pointer;
-  border: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text);
-  transition: border-color .12s, transform .05s;
-}
-.chip-item:hover { border-color: var(--cp-accent); }
-.chip-item:active { transform: translateY(1px); }
-.slot .chip-item { background: var(--cp-accent-soft); border-color: var(--cp-accent); flex: 1; cursor: pointer; }
-.bank { display: flex; flex-wrap: wrap; gap: 9px; }
-.bank-label, .group-label { font-size: 0.8rem; font-weight: 700; color: var(--cp-text-muted); margin: 6px 0; letter-spacing: .03em; text-transform: uppercase; }
-
-/* Sizing */
-.control { margin: 18px 0; }
-.control .lab { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 8px; }
-.control .lab .name { font-weight: 600; }
-.control .lab .val { font-weight: 700; color: var(--cp-accent); font-size: 1.05rem; }
-input[type=range] {
-  width: 100%; accent-color: var(--cp-accent); height: 24px; cursor: pointer;
-}
-.target-hint { font-size: 0.82rem; margin-top: 6px; font-weight: 600; }
-.target-hint.ok { color: var(--cp-success); }
-.target-hint.no { color: var(--cp-danger); }
-.readout {
-  margin: 6px 0 4px; padding: 16px; border-radius: 0.625rem;
-  background: var(--cp-bg-elevated); border: 1px solid var(--cp-border);
-  font-size: 0.96rem;
-}
-.readout .big { font-size: 1.35rem; font-weight: 700; }
-.bar { height: 10px; border-radius: 999px; background: var(--cp-surface-soft); border: 1px solid var(--cp-border); overflow: hidden; margin-top: 8px; }
-.bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--cp-accent), var(--cp-accent-hover)); transition: width .3s; }
-.warn-note {
-  margin-top: 10px; font-size: 0.86rem; color: var(--cp-warning); font-weight: 600;
-}
-
-/* Home / journey */
-.hero { text-align: center; padding: 8px 0 4px; }
-.hero .badge-row { display: flex; justify-content: center; gap: 10px; font-size: 2.1rem; margin-bottom: 6px; }
-.journey { display: grid; gap: 14px; margin: 22px 0 8px; }
-@media (min-width: 680px) { .journey { grid-template-columns: repeat(3, 1fr); } }
-.stop {
-  border: 1px solid var(--cp-border); border-radius: 14px; padding: 18px;
-  background: var(--cp-surface-soft); position: relative;
-}
-.stop .n { font-size: 0.72rem; font-weight: 700; color: var(--cp-text-muted); letter-spacing: .05em; }
-.stop .em { font-size: 1.9rem; margin: 4px 0 6px; }
-.stop h3 { margin: 0 0 6px; font-size: 1.05rem; }
-.stop p { margin: 0; font-size: 0.86rem; color: var(--cp-text-muted); }
-.facts { display: grid; gap: 8px; margin: 16px 0 4px; }
-.fact { display: flex; gap: 10px; align-items: flex-start; font-size: 0.92rem; color: var(--cp-text-muted); }
-.fact .f-em { flex: none; }
-
-/* Module complete + final */
-.center { text-align: center; }
-.medal { font-size: 4rem; margin: 6px 0; animation: pop .5s ease; }
-@keyframes pop { 0% { transform: scale(.3); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
-.badge-earned {
-  display: inline-flex; align-items: center; gap: 9px; margin: 6px;
-  padding: 9px 16px; border-radius: 999px; font-weight: 700;
-  background: var(--cp-accent-soft); color: var(--cp-accent); border: 1px solid var(--cp-accent);
-}
-.cert {
-  border: 2px solid var(--cp-accent); border-radius: 16px; padding: 30px;
-  background: var(--cp-bg-elevated); text-align: center; margin-top: 18px;
-}
-.cert .seal { font-size: 3rem; }
-.cert h2 { margin: 6px 0; }
-.cert .score-big { font-size: 3rem; font-weight: 800; color: var(--cp-accent); margin: 6px 0; }
-.grade { font-size: 1.2rem; font-weight: 700; }
+/* Overlays */
+.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 20px;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(4px); }
+.modal { width: min(560px, 100%); max-height: 90vh; overflow:auto; background: var(--cp-surface); border: 1px solid var(--cp-border);
+  border-radius: 18px; padding: 28px; box-shadow: var(--cp-shadow); }
+.modal.center { text-align: center; }
+.modal h1 { margin: 0 0 8px; font-size: 1.6rem; }
+.modal p.lede { color: var(--cp-text-muted); font-size: 1rem; margin: 0 0 6px; }
+.medal { font-size: 3.4rem; margin: 4px 0; }
+.facts { display: grid; gap: 9px; margin: 16px 0 4px; text-align: left; }
+.fact { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--cp-text-muted); }
+.controls-hint { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin: 14px 0 2px; font-size:.82rem; color: var(--cp-text-soft); }
+.controls-hint span { display:inline-flex; align-items:center; gap:6px; }
+.kbd { font-family: Consolas, monospace; background: var(--cp-surface-soft); border: 1px solid var(--cp-border);
+  border-radius: 5px; padding: 1px 7px; font-size: .85em; }
+.cert { border: 2px solid var(--cp-accent); border-radius: 16px; padding: 24px; background: var(--cp-bg-elevated); margin-top: 6px; }
+.score-big { font-size: 3rem; font-weight: 800; color: var(--cp-accent); margin: 4px 0; }
+.grade { font-size: 1.15rem; font-weight: 700; }
+.badge-earned { display: inline-flex; align-items: center; gap: 8px; margin: 5px; padding: 8px 14px; border-radius: 999px;
+  font-weight: 700; background: var(--cp-accent-soft); color: var(--cp-accent); border: 1px solid var(--cp-accent); font-size: .88rem; }
+.tag-list { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin-top: 12px; }
+.row-end { display: flex; justify-content: center; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 .muted { color: var(--cp-text-muted); }
-.tag-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
-.disclaimer { font-size: 0.78rem; color: var(--cp-text-soft); margin-top: 24px; text-align: center; line-height: 1.5; }
-.kbd { font-family: Consolas, monospace; background: var(--cp-surface-soft); border: 1px solid var(--cp-border); border-radius: 5px; padding: 1px 6px; font-size: 0.85em; }
+.disclaimer { font-size: .76rem; color: var(--cp-text-soft); margin-top: 18px; text-align: center; line-height: 1.5; }
+a.link { color: var(--cp-link); }
+
+/* Loading / error */
+#loading { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: var(--cp-bg); }
+.spinner { width: 42px; height: 42px; border-radius: 50%; border: 4px solid var(--cp-border); border-top-color: var(--cp-accent);
+  animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#err { display:none; }
+.toast { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 25; pointer-events: none;
+  background: var(--cp-panel-strong); backdrop-filter: blur(10px); border: 1px solid var(--cp-border); border-radius: 999px;
+  padding: 9px 18px; font-size: .9rem; font-weight: 600; box-shadow: var(--cp-shadow); opacity: 0; transition: opacity .25s, transform .25s; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(4px); }
+.toast.ok { color: var(--cp-success); } .toast.bad { color: var(--cp-danger); } .toast.warn { color: var(--cp-warning); }
+.hidden { display: none !important; }
 </style>
 </head>
 <body>
-<header class="app">
-  <div class="head-inner">
-    <div class="head-row">
-      <div class="brand">
-        <span class="logo">⚡</span>
-        <span>Power Up!<small>TAFE NSW · Renewables &amp; Home AI Infrastructure</small></span>
-      </div>
-      <span class="spacer"></span>
-      <span class="chip" id="scoreChip" hidden>⭐ <b id="scoreVal">0</b></span>
-      <button class="icon-btn" id="themeBtn" title="Toggle light/dark">🌗</button>
-    </div>
-    <div class="progress"><span id="progFill"></span></div>
-    <div class="stage-label" id="stageLabel">Ready to start</div>
-  </div>
-</header>
+<div id="stage"></div>
 
-<div class="wrap">
-  <main id="screen"></main>
+<!-- HUD -->
+<div class="hud panel" id="topbar">
+  <div class="brand"><span class="logo">☀️</span><span>Solar Install 3D<small>TAFE NSW · Rooftop Solar &amp; Battery Simulator</small></span></div>
+  <span class="spacer"></span>
+  <span class="stat">⭐ <b id="scoreVal">0</b></span>
+  <button class="icon-btn" id="resetCam" title="Reset camera">🎥</button>
+  <button class="icon-btn" id="themeBtn" title="Toggle light/dark">🌗</button>
 </div>
 
-<script>
-"use strict";
-const screen = document.getElementById('screen');
-const scoreVal = document.getElementById('scoreVal');
-const scoreChip = document.getElementById('scoreChip');
-const progFill = document.getElementById('progFill');
-const stageLabel = document.getElementById('stageLabel');
+<div class="hud" id="phasebar"></div>
 
-document.getElementById('themeBtn').addEventListener('click', () => {
-  const cur = document.documentElement.getAttribute('data-theme');
-  document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
-});
+<div class="hud panel" id="instruct">
+  <div class="tag" id="insTag">PHASE 1</div>
+  <h2 id="insTitle">Loading…</h2>
+  <p id="insBody"></p>
+  <div class="live" id="insLive"></div>
+  <div class="btn-row" id="insBtns"></div>
+</div>
 
-/* ---------------- Curriculum data ---------------- */
-const MODULES = [
-  {
-    title: "Solar & Battery Install",
-    icon: "☀️",
-    badge: { em: "☀️", name: "Solar Sparky" },
-    stages: [
-      {
-        type: "quiz",
-        title: "Site Assessment",
-        questions: [
-          {
-            q: "In NSW (Southern Hemisphere), which roof aspect generally gives the best year-round solar generation?",
-            options: ["North-facing", "South-facing", "East-facing", "West-facing"],
-            answer: 0,
-            explain: "In the Southern Hemisphere the sun tracks across the northern sky, so north-facing panels capture the most energy across the year. East/west splits can suit households that use more power in the morning and evening."
-          },
-          {
-            q: "A pitched roof in Sydney (latitude ≈ 34°S). What tilt angle is broadly optimal for annual output?",
-            options: ["0° (dead flat)", "About 30–35°", "60°", "90° (vertical)"],
-            answer: 1,
-            explain: "A tilt close to the site's latitude (~34° for Sydney) maximises annual yield. Most tiled/Colorbond roofs already sit near this, so panels are usually mounted flush to the roof pitch."
-          },
-          {
-            q: "During the site visit you spot a tree shading part of the roof each afternoon. Best response?",
-            options: [
-              "Do a shading analysis and design the array/string layout around it (optimisers or micro-inverters help)",
-              "Ignore it — panels still make some power in shade",
-              "Pack the shaded area with panels anyway to fill the roof",
-              "Recommend removing every tree on the block"
-            ],
-            answer: 0,
-            explain: "Even partial shade on one panel can drag down a whole series string. Assess shading (e.g. with a tool/app), avoid heavily shaded zones, and use module-level electronics (optimisers/micro-inverters) where needed."
-          },
-          {
-            q: "Before anyone climbs onto the roof, what must be confirmed first?",
-            options: [
-              "Roof structural integrity plus a safe access and fall-protection plan",
-              "The colour of the roof tiles",
-              "Mobile reception on the roof",
-              "Nothing — just get up there and start"
-            ],
-            answer: 0,
-            explain: "Working at heights is high-risk. SafeWork NSW requires fall protection (anchors, harness/edge protection) and you must verify the roof can carry the load and the crew safely."
-          }
-        ]
-      },
-      {
-        type: "sizing",
-        title: "System Sizing",
-        intro: "The Nguyen household in Western Sydney uses about <b>20 kWh/day</b>. Sydney averages <b>~4.2 peak sun hours</b> and we assume a <b>0.8</b> performance ratio (losses from heat, wiring, inverter). Size the array and the battery.",
-        controls: [
-          { id: "panelKw", label: "☀️ Solar array size", min: 1, max: 10, step: 0.5, start: 3, unit: "kW", dp: 1 },
-          { id: "batteryKwh", label: "🔋 Usable battery capacity", min: 0, max: 20, step: 1, start: 4, unit: "kWh", dp: 0 }
-        ],
-        compute(v) {
-          const gen = v.panelKw * 4.2 * 0.8;
-          const cover = Math.min(150, gen / 20 * 100);
-          return {
-            targets: { panelKw: [5.5, 7.5], batteryKwh: [10, 14] },
-            readout:
-              '<div>Estimated generation: <span class="big">' + gen.toFixed(1) + ' kWh/day</span></div>' +
-              '<div class="muted" style="margin-top:4px">Household demand: 20 kWh/day · Daytime offset: <b>' + cover.toFixed(0) + '%</b></div>' +
-              '<div class="bar"><span style="width:' + (gen/20*100).toFixed(0) + '%"></span></div>',
-            tip: "A ~6 kW array makes roughly 20 kWh/day in Sydney (6 × 4.2 × 0.8 ≈ 20). A 10–14 kWh battery stores enough daytime surplus to carry the evening and overnight load — without paying for capacity you'll rarely fill."
-          };
-        }
-      },
-      {
-        type: "order",
-        title: "Wire It Up Safely",
-        intro: "Arrange the grid-connected PV system from the panels through to the grid, following the energy path used under AS/NZS 5033 &amp; 4777.",
-        items: [
-          "Solar PV array (modules)",
-          "Rooftop DC isolator",
-          "Solar inverter",
-          "AC isolator",
-          "Main switchboard (solar supply main switch)",
-          "Meter & grid connection"
-        ],
-        explain: "DC from the panels passes through a rooftop DC isolator to the inverter, which converts it to AC. That AC runs through an AC isolator to the switchboard (with its own solar main switch) and out to the meter/grid. Isolators each side of the inverter let you safely de-energise for service."
-      },
-      {
-        type: "quiz",
-        title: "Standards & Compliance",
-        questions: [
-          {
-            q: "Which Australian/NZ Standard covers the installation and safety of PV arrays?",
-            options: ["AS/NZS 5033", "ISO 9001", "AS/NZS 1768", "There is no standard"],
-            answer: 0,
-            explain: "AS/NZS 5033 is the installation and safety standard for PV arrays. It works alongside AS/NZS 4777 (inverter grid connection), AS/NZS 5139 (batteries) and AS/NZS 3000 (the Wiring Rules)."
-          },
-          {
-            q: "For a grid-connected system to be eligible for STC rebates, the install must be done/supervised by an installer accredited by…",
-            options: [
-              "The Clean Energy Council / Solar Accreditation Australia (SAA)",
-              "The local council mayor",
-              "Nobody — accreditation isn't required",
-              "The panel manufacturer's marketing team"
-            ],
-            answer: 0,
-            explain: "Small-scale Technology Certificates (STCs) require an accredited installer (CEC / Solar Accreditation Australia) and CEC-approved components. No accreditation = no rebate and likely non-compliant work."
-          },
-          {
-            q: "Before working on the DC side of the array, the correct safe procedure is to…",
-            options: [
-              "Isolate, lock out / tag out, then test to verify it's de-energised before touching",
-              "Work fast so you're exposed for less time",
-              "Only switch off the AC side and assume DC is safe",
-              "Put on sunglasses and hope for the best"
-            ],
-            answer: 0,
-            explain: "Always isolate, apply lock-out/tag-out, and 'test before you touch'. Remember PV arrays are live whenever there's daylight — you can't switch the sun off, so isolation and verification are essential."
-          },
-          {
-            q: "A home battery (e.g. a wall-mounted lithium system) must be installed in line with which standard?",
-            options: ["AS/NZS 5139", "AS/NZS 5033 only", "AS/NZS 4777 only", "No standard applies to batteries"],
-            answer: 0,
-            explain: "AS/NZS 5139 covers the safety and installation of battery energy storage systems — including location, clearances and signage. Battery placement near living spaces and exits is tightly controlled."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: "Home GPU Cluster",
-    icon: "🖥️",
-    badge: { em: "🖥️", name: "Cluster Commander" },
-    stages: [
-      {
-        type: "quiz",
-        title: "Choose Your Hardware",
-        questions: [
-          {
-            q: "For running large AI models locally, which GPU spec usually matters most?",
-            options: [
-              "VRAM (video memory) capacity",
-              "The colour and RGB lighting of the cooler",
-              "The length of the power cable",
-              "How many USB ports the card has"
-            ],
-            answer: 0,
-            explain: "Model weights and activations have to fit in VRAM. More VRAM lets you load bigger models (or longer context) without spilling to slow system RAM. Memory bandwidth matters too, but capacity is the first hard limit."
-          },
-          {
-            q: "You want four GPUs in a single node. Which motherboard feature matters most?",
-            options: [
-              "Enough PCIe slots/lanes with adequate physical spacing",
-              "Built-in Wi-Fi",
-              "Lots of RGB headers",
-              "The number of SATA ports"
-            ],
-            answer: 0,
-            explain: "Multi-GPU nodes need enough PCIe lanes and slot spacing (often workstation/server boards, or risers). Cramming thick cards together starves them of airflow and lanes."
-          },
-          {
-            q: "Each of your four GPUs draws ~300 W. Which PSU is the sensible choice?",
-            options: [
-              "~1600 W, 80+ rated (covers GPUs + the rest, with headroom)",
-              "A 500 W unit",
-              "A 750 W unit",
-              "A 1000 W unit"
-            ],
-            answer: 0,
-            explain: "4 × 300 W = 1200 W just for GPUs, plus ~150–250 W for CPU/board/drives ≈ ~1400 W. Add headroom for transient spikes → ~1600 W (or split across dual PSUs). Running a PSU at 100% constantly is asking for trouble."
-          },
-          {
-            q: "Why is it a bad idea to run the whole cluster off one cheap power board?",
-            options: [
-              "Combined draw can exceed the board/circuit rating — an overheating and fire risk",
-              "It just looks untidy",
-              "Power boards make the GPUs run slower",
-              "It voids the GPU's warranty"
-            ],
-            answer: 0,
-            explain: "A multi-GPU node can pull thousands of watts. Daisy-chained power boards and thin extension leads overheat. Heavy continuous loads belong on properly rated, ideally dedicated, circuits."
-          }
-        ]
-      },
-      {
-        type: "sizing",
-        title: "Power Budget",
-        intro: "You're speccing one cluster node. Each GPU draws <b>~300 W</b> and the rest of the machine (CPU, board, drives, fans) adds <b>~200 W</b>. Choose how many GPUs to fit, then size the PSU with sensible headroom.",
-        controls: [
-          { id: "gpus", label: "🖥️ GPUs in the node", min: 1, max: 8, step: 1, start: 2, unit: "GPUs", dp: 0 },
-          { id: "psu", label: "🔌 PSU rating", min: 500, max: 2600, step: 50, start: 750, unit: "W", dp: 0 }
-        ],
-        compute(v) {
-          const total = v.gpus * 300 + 200;
-          const lo = Math.round(total * 1.2);
-          const hi = Math.round(total * 1.6);
-          let html =
-            '<div>Total node draw: <span class="big">' + total + ' W</span></div>' +
-            '<div class="muted" style="margin-top:4px">Recommended PSU: <b>' + lo + '–' + hi + ' W</b> (≈ 1.2–1.6× draw)</div>';
-          if (total > 1920) {
-            html += '<div class="warn-note">⚠ ' + total + ' W exceeds one 10 A / 240 V circuit\u2019s safe continuous load (≈1920 W). Split the load across dedicated circuits — and get a licensed electrician.</div>';
-          }
-          return {
-            targets: { psu: [total * 1.2, total * 1.6] },
-            readout: html,
-            tip: "Size the PSU to about 1.2–1.6× the real draw so it runs in its efficient band and survives transient spikes. The GPU count is your design choice — what's scored is whether the PSU matches the load you picked."
-          };
-        }
-      },
-      {
-        type: "order",
-        title: "Build the Cluster",
-        intro: "Put the build-out of a small home GPU cluster into a sensible order.",
-        items: [
-          "Plan power & cooling (verify circuits, airflow, space)",
-          "Assemble the nodes (mount GPUs, connect PSUs)",
-          "Connect networking (switch, head node + workers)",
-          "Install OS & GPU drivers (e.g. CUDA / ROCm)",
-          "Install cluster/orchestration software (Slurm, Ray, or Kubernetes)",
-          "Test, benchmark & monitor temps and power draw"
-        ],
-        explain: "Sort out power and cooling before you build, assemble the hardware, wire up the network, then layer software: drivers first, then the orchestration that schedules jobs across nodes. Finish by benchmarking and putting monitoring in place so you catch thermal or power problems early."
-      },
-      {
-        type: "quiz",
-        title: "Thermals & Safety",
-        questions: [
-          {
-            q: "Four GPUs at full load dump a lot of heat into a small room. Best practice?",
-            options: [
-              "Provide active ventilation/exhaust and monitor temperatures",
-              "Seal the room up tight so dust can't get in",
-              "Aim one small desk fan at the rig and hope",
-              "Hide it in a closed cupboard with no airflow"
-            ],
-            answer: 0,
-            explain: "A 1.4 kW node is basically a space heater. You need real airflow — intake and exhaust — and temperature monitoring. Recirculating hot air just makes everything throttle."
-          },
-          {
-            q: "Your GPUs start 'thermal throttling'. What does that mean?",
-            options: [
-              "They lower their clock speed to avoid overheating, reducing performance",
-              "They are permanently damaged",
-              "The network connection has dropped",
-              "The PSU is oversized"
-            ],
-            answer: 0,
-            explain: "Thermal throttling is the GPU protecting itself by slowing down when it gets too hot. It's a sign your cooling/airflow can't keep up — fix the thermals to get your performance back."
-          },
-          {
-            q: "To avoid tripping breakers and creating a fire risk at home, you should…",
-            options: [
-              "Keep continuous load under ~80% of a circuit's rating and use dedicated circuits for heavy nodes",
-              "Daisy-chain several power boards together",
-              "Use the thinnest, longest extension lead you can find",
-              "Remove the smoke alarm so it stops chirping"
-            ],
-            answer: 0,
-            explain: "Circuits are rated for continuous use at about 80% of capacity (a 10 A circuit ≈ 1920 W continuous). Big nodes deserve their own dedicated circuit installed by an electrician — never bodge it with power boards and skinny leads."
-          },
-          {
-            q: "When is a licensed electrician legally required?",
-            options: [
-              "Adding new fixed wiring or a dedicated circuit at the switchboard",
-              "Plugging a PC into an existing power point",
-              "Slotting a GPU into a PCIe slot",
-              "Updating the GPU drivers"
-            ],
-            answer: 0,
-            explain: "In NSW, fixed-wiring work — new circuits, switchboard changes, hard-wiring — must be done by a licensed electrician. Plugging appliances into existing GPOs is fine; altering the wiring is not DIY."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    title: "Capstone: Run Your AI Lab on Sunshine",
-    icon: "☀️➜🖥️",
-    badge: { em: "⚡", name: "Off-Grid AI Architect" },
-    stages: [
-      {
-        type: "sizing",
-        title: "Solar-Powered Cluster",
-        intro: "Bring it together. Your GPU node draws <b>~1.4 kW</b> and you run it <b>6 h/day</b> → <b>8.4 kWh/day</b>. The household uses <b>20 kWh/day</b>, so total demand is <b>~28.4 kWh/day</b>. Size a solar array (Sydney: 4.2 sun hours, 0.8 performance ratio) and a battery to keep the lab running into the evening.",
-        controls: [
-          { id: "panelKw", label: "☀️ Solar array size", min: 1, max: 14, step: 0.5, start: 5, unit: "kW", dp: 1 },
-          { id: "batteryKwh", label: "🔋 Usable battery capacity", min: 0, max: 30, step: 1, start: 8, unit: "kWh", dp: 0 }
-        ],
-        compute(v) {
-          const gen = v.panelKw * 4.2 * 0.8;
-          const demand = 28.4;
-          const cover = gen / demand * 100;
-          return {
-            targets: { panelKw: [8, 10.5], batteryKwh: [16, 22] },
-            readout:
-              '<div>Generation: <span class="big">' + gen.toFixed(1) + ' kWh/day</span> vs demand 28.4 kWh/day</div>' +
-              '<div class="muted" style="margin-top:4px">Daily energy coverage: <b>' + cover.toFixed(0) + '%</b></div>' +
-              '<div class="bar"><span style="width:' + Math.min(100, cover).toFixed(0) + '%"></span></div>',
-            tip: "To make ~28 kWh/day you need about an 8.5 kW array (8.5 × 4.2 × 0.8 ≈ 28.6). Because you run the cluster after dark, a 16–22 kWh battery stores the daytime surplus to cover the evening household + cluster load."
-          };
-        }
-      },
-      {
-        type: "quiz",
-        title: "Reflection",
-        questions: [
-          {
-            q: "You want to run the GPU cluster at night, entirely on solar. What makes that self-sufficiency possible?",
-            options: [
-              "A correctly sized battery that stores daytime generation for night-time use",
-              "Running the panels under moonlight",
-              "A faster Wi-Fi router",
-              "Nothing — it's physically impossible"
-            ],
-            answer: 0,
-            explain: "Panels only generate in daylight, so night-time loads must come from stored energy. Right-sizing the battery (and matching it to your generation and usage pattern) is what lets a solar lab run after sunset."
-          },
-          {
-            q: "Best way to cut how much battery you need for the cluster?",
-            options: [
-              "Schedule heavy GPU jobs for daytime, running them directly off live solar",
-              "Run all jobs at 3 a.m. on battery only",
-              "Add more RGB lighting",
-              "Disconnect the monitoring so you don't see the cost"
-            ],
-            answer: 0,
-            explain: "'Load shifting' — running flexible, heavy compute while the sun is up — uses generation directly and shrinks the battery (and grid import) you need. It's the cheapest kWh you'll ever use."
-          }
-        ]
-      }
-    ]
-  }
-];
+<div class="hud panel" id="gauges">
+  <h3>Live system</h3>
+  <div class="gauge"><div class="lab"><span>☀️ Sun</span><b id="sunPct">0%</b></div><div class="bar sun"><span id="sunBar"></span></div></div>
+  <div class="gauge"><div class="lab"><span>⚡ Generating</span><b id="genVal">0.0 kW</b></div><div class="bar"><span id="genBar"></span></div></div>
+  <div class="gauge"><div class="lab"><span>🔋 Battery</span><b id="battPct">50%</b></div><div class="bar batt"><span id="battBar" style="width:50%"></span></div></div>
+  <div class="gauge"><div class="lab"><span>🏠 Home</span><b id="homeState">—</b></div></div>
+  <div id="clockLbl">06:00</div>
+</div>
 
-/* ---------------- State ---------------- */
-const state = { moduleIndex: 0, stageIndex: 0, score: 0, completed: 0, earnedBadges: [] };
-let totalStages = 0, totalMax = 0;
-function stageMax(s) { return s.type === 'quiz' ? s.questions.length * 100 : 100; }
-MODULES.forEach(m => m.stages.forEach(s => { totalStages++; totalMax += stageMax(s); }));
+<div class="toast" id="toast"></div>
 
-function updateHeader(showScore) {
-  scoreVal.textContent = state.score;
-  scoreChip.hidden = !showScore;
-  progFill.style.width = (state.completed / totalStages * 100) + '%';
+<!-- Intro overlay -->
+<div class="overlay" id="introOverlay">
+  <div class="modal center">
+    <div class="medal">☀️🔋</div>
+    <h1>Build a Rooftop Solar &amp; Battery System</h1>
+    <p class="lede">A hands-on 3D installation simulator for TAFE NSW. Orbit the house, choose the right roof, mount the panels, wire the system safely to Australian standards, then switch on the sun and watch your battery power the home after dark.</p>
+    <div class="controls-hint">
+      <span>🖱️ <span class="kbd">Drag</span> orbit</span>
+      <span>🔍 <span class="kbd">Scroll</span> zoom</span>
+      <span>👆 <span class="kbd">Click</span> parts to install</span>
+    </div>
+    <div class="facts" style="max-width:430px;margin-left:auto;margin-right:auto">
+      <div class="fact"><span>🧭</span><span>Real NSW design: north-facing roof, tilt ≈ latitude, mind the shade.</span></div>
+      <div class="fact"><span>🔌</span><span>Wire it in the correct order with DC &amp; AC isolators (AS/NZS 5033 / 4777).</span></div>
+      <div class="fact"><span>🔋</span><span>Size storage so daytime sun runs the house into the night.</span></div>
+    </div>
+    <div class="row-end">
+      <button class="btn-primary" id="startBtn">Start the install →</button>
+    </div>
+    <p class="disclaimer">Educational simulation only. Real solar, battery &amp; electrical work in NSW must be performed by licensed/accredited professionals per current standards and SafeWork NSW.</p>
+  </div>
+</div>
+
+<!-- Results overlay -->
+<div class="overlay hidden" id="resultOverlay">
+  <div class="modal center">
+    <div class="medal" id="resMedal">🏅</div>
+    <div class="cert">
+      <div class="muted" style="letter-spacing:.08em;font-size:.76rem;font-weight:700">TAFE NSW · ROOFTOP SOLAR INSTALL (PRACTICE)</div>
+      <div class="score-big" id="resPct">0%</div>
+      <div class="grade" id="resGrade">—</div>
+      <p class="muted" id="resBlurb" style="max-width:420px;margin:8px auto 0"></p>
+      <div class="tag-list" id="resBadges"></div>
+    </div>
+    <div class="facts" style="max-width:460px;margin:18px auto 0">
+      <div class="fact"><span>🧭</span><span>North-facing slope, tilt ≈ latitude (~34°S Sydney) maximises annual yield; shade on one panel can drag down a whole string.</span></div>
+      <div class="fact"><span>🔌</span><span>DC isolator → inverter → AC isolator → switchboard → meter. Isolate &amp; test before you touch. AS/NZS 5033/4777/5139/3000.</span></div>
+      <div class="fact"><span>🔋</span><span>A right-sized battery stores the daytime surplus to power the home after sunset.</span></div>
+    </div>
+    <div class="row-end">
+      <button class="btn-ghost" id="replayBtn">↺ Replay</button>
+      <a class="btn-primary" id="repoBtn" href="https://github.com/peterxing/power-up-solar-gpu" target="_blank" rel="noopener" style="text-decoration:none">★ View on GitHub</a>
+    </div>
+    <p class="disclaimer">Practice micro-credential for learning only — not a formal qualification. Always engage licensed/accredited professionals for real installs in NSW.</p>
+  </div>
+</div>
+
+<!-- Loading / error -->
+<div id="loading"><div style="text-align:center"><div class="spinner"></div><div class="muted">Loading 3D engine…</div></div></div>
+<div class="overlay" id="err"><div class="modal center"><h1>⚠️ Couldn’t start 3D</h1><p class="lede" id="errMsg">Your browser/device may not support WebGL, or the 3D library failed to load. Try a desktop browser (Chrome/Edge/Firefox) with hardware acceleration enabled.</p></div></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+let THREE, OrbitControls;
+try {
+  THREE = await import('three');
+  ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+} catch (e) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('err').style.display = 'grid';
+  document.getElementById('errMsg').textContent = 'Failed to load the 3D library (network blocked?). ' + e.message;
+  throw e;
 }
 
-/* ---------------- Helpers ---------------- */
-function shuffle(a) {
-  a = a.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-const LETTERS = ["A", "B", "C", "D", "E", "F"];
+/* ===================== Globals ===================== */
+const stageEl = document.getElementById('stage');
+let renderer, scene, camera, controls, raycaster, pointer;
+let sunLight, sunMesh, hemi, ambient;
+const clock = new THREE.Clock();
 
-function advanceStage() {
-  state.completed++;
-  state.stageIndex++;
-  const mod = MODULES[state.moduleIndex];
-  if (state.stageIndex >= mod.stages.length) {
-    if (!state.earnedBadges.includes(mod.badge.name)) state.earnedBadges.push(mod.badge.name);
-    renderModuleComplete(mod);
+const NORTH = new THREE.Vector3(0, 0, 1); // +Z = north
+const HOUSE = { W: 7, H: 3, D: 6, ridge: 4.6 };
+
+const state = {
+  phase: 0,                 // 0 intro,1 orient,2 panels,3 wire,4 commission,5 done
+  score: 1000,
+  maxScore: 1000,
+  chosenFace: null,
+  panelsTarget: 6,
+  panelsPlaced: 0,
+  shadedUsed: 0,
+  wireIndex: 0,
+  wireMistakes: 0,
+  badges: []
+};
+
+let pickables = [];          // current raycast targets
+const roofFaces = {};        // 'north'|'south' -> group
+let slotMeshes = [];         // phase 2
+let wireNodes = [];          // phase 3 ordered nodes
+let placedPanels = [];
+let energyPulses = [];
+const wireCurves = [];
+
+/* camera tween */
+const camTween = { active: false, t: 0, dur: 1, fromP: new THREE.Vector3(), toP: new THREE.Vector3(), fromT: new THREE.Vector3(), toT: new THREE.Vector3() };
+
+/* ===================== Helpers ===================== */
+function tterp(a,b,t){ return a+(b-a)*t; }
+function easeInOut(t){ return t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+
+function makeLabel(text, color) {
+  const pad = 16, fs = 44;
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d');
+  ctx.font = `700 ${fs}px Segoe UI, sans-serif`;
+  const w = Math.ceil(ctx.measureText(text).width) + pad*2;
+  const h = fs + pad*1.2;
+  c.width = w; c.height = h;
+  ctx.font = `700 ${fs}px Segoe UI, sans-serif`;
+  ctx.fillStyle = 'rgba(20,20,20,0.82)';
+  roundRect(ctx, 0, 0, w, h, 18); ctx.fill();
+  ctx.fillStyle = color || '#fff';
+  ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+  ctx.fillText(text, w/2, h/2 + 2);
+  const tex = new THREE.CanvasTexture(c);
+  tex.anisotropy = 4;
+  const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true }));
+  spr.scale.set(w/h * 0.56, 0.56, 1);
+  spr.renderOrder = 999;
+  return spr;
+}
+function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+function toast(msg, kind){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + (kind||'');
+  clearTimeout(toast._t); toast._t = setTimeout(()=> t.className = 'toast ' + (kind||''), 1800);
+}
+function setScore(){ document.getElementById('scoreVal').textContent = Math.max(0, Math.round(state.score)); }
+
+/* ===================== Scene build ===================== */
+function buildScene(){
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x9fc6e8);
+  scene.fog = new THREE.Fog(0x9fc6e8, 28, 70);
+
+  camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
+  camera.position.set(10, 7, 12);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  stageEl.appendChild(renderer.domElement);
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true; controls.dampingFactor = 0.08;
+  controls.minDistance = 5; controls.maxDistance = 40;
+  controls.maxPolarAngle = Math.PI/2 - 0.05;
+  controls.target.set(0, 2.4, 0);
+
+  raycaster = new THREE.Raycaster();
+  pointer = new THREE.Vector2();
+
+  // Lights
+  hemi = new THREE.HemisphereLight(0xcfe6ff, 0x6f7a55, 0.85);
+  scene.add(hemi);
+  ambient = new THREE.AmbientLight(0xffffff, 0.18); scene.add(ambient);
+  sunLight = new THREE.DirectionalLight(0xfff3d6, 1.5);
+  setSun(0.5);
+  sunLight.castShadow = true;
+  sunLight.shadow.mapSize.set(2048, 2048);
+  const s = 16; const sc = sunLight.shadow.camera;
+  sc.left=-s; sc.right=s; sc.top=s; sc.bottom=-s; sc.near=1; sc.far=80;
+  sunLight.shadow.bias = -0.0005;
+  scene.add(sunLight); scene.add(sunLight.target);
+
+  sunMesh = new THREE.Mesh(new THREE.SphereGeometry(1.2, 24, 24),
+    new THREE.MeshBasicMaterial({ color: 0xffd97a }));
+  scene.add(sunMesh);
+  const glow = new THREE.Mesh(new THREE.SphereGeometry(2.0, 24, 24),
+    new THREE.MeshBasicMaterial({ color: 0xffe9a8, transparent: true, opacity: 0.25 }));
+  sunMesh.add(glow);
+
+  buildGround();
+  buildHouse();
+  buildRoof();
+  buildTree(-5.5, 4.2);    // shade source near NE of north roof
+  buildCompass();
+
+  addEventListener('resize', onResize);
+  renderer.domElement.addEventListener('pointerdown', onPointerDown);
+  renderer.domElement.addEventListener('pointerup', onPointerUp);
+}
+
+function setSun(dayT){
+  // dayT 0..1 → sun arcs E(+x rises) to W(-x). Elevation peaks midday.
+  const az = Math.PI * (1 - dayT);              // pi..0
+  const el = Math.sin(Math.PI * dayT);          // 0..1..0
+  const r = 26;
+  const x = Math.cos(az) * r * 0.9;
+  const y = Math.max(0.5, el * 20 + 1);
+  const z = Math.sin(az) * r * 0.5 + 6;         // bias toward north so it lights the north roof
+  sunLight.position.set(x, y, z);
+  if (sunMesh) sunMesh.position.copy(sunLight.position);
+  const warmth = 0.5 + 0.5*el;
+  sunLight.intensity = 0.25 + el * 1.6;
+  if (hemi) hemi.intensity = 0.35 + el * 0.7;
+  // sky tint day->dusk
+  const day = new THREE.Color(0x9fc6e8), dusk = new THREE.Color(0x243049);
+  const night = new THREE.Color(0x12182b);
+  let skyc;
+  if (el > 0.15) skyc = day.clone().lerp(new THREE.Color(0xbcd8ef), warmth-0.5);
+  else skyc = (dayT < 0.5 ? night : dusk).clone().lerp(day, Math.max(0, el/0.15));
+  if (scene){ scene.background.copy(skyc); scene.fog.color.copy(skyc); }
+  sunMesh && (sunMesh.material.color.setHSL(0.11, 1, 0.45 + 0.25*el));
+}
+
+function buildGround(){
+  const g = new THREE.Mesh(new THREE.CircleGeometry(60, 48),
+    new THREE.MeshStandardMaterial({ color: 0x6f8f56, roughness: 1 }));
+  g.rotation.x = -Math.PI/2; g.receiveShadow = true; scene.add(g);
+  // driveway
+  const dw = new THREE.Mesh(new THREE.PlaneGeometry(3, 8),
+    new THREE.MeshStandardMaterial({ color: 0x8a8d92, roughness: 1 }));
+  dw.rotation.x = -Math.PI/2; dw.position.set(0, 0.01, 7.5); dw.receiveShadow = true; scene.add(dw);
+}
+
+function buildHouse(){
+  const { W, H, D } = HOUSE;
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0xe5ddcd, roughness: 0.9 });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(W, H, D), wallMat);
+  body.position.y = H/2; body.castShadow = true; body.receiveShadow = true;
+  scene.add(body);
+
+  // door + windows on north wall (z=+D/2)
+  const trim = new THREE.MeshStandardMaterial({ color: 0x6b4f3a, roughness: .8 });
+  const door = new THREE.Mesh(new THREE.BoxGeometry(0.9, 1.8, 0.1), trim);
+  door.position.set(-2.2, 0.9, D/2 + 0.02); scene.add(door);
+  const winMat = new THREE.MeshStandardMaterial({ color: 0x2a3340, roughness: .3, metalness: .2,
+    emissive: 0x000000 });
+  window._winMat = winMat;
+  for (const x of [-0.4, 1.2]){
+    const w = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.0, 0.1), winMat);
+    w.position.set(x, 1.4, D/2 + 0.02); scene.add(w);
+  }
+}
+
+function buildRoof(){
+  const { W, H, D, ridge } = HOUSE;
+  const overhang = 0.4;
+  const roofMat = new THREE.MeshStandardMaterial({ color: 0x4a4f57, roughness: 0.85, side: THREE.DoubleSide });
+  const gableMat = new THREE.MeshStandardMaterial({ color: 0xe5ddcd, roughness: 0.9, side: THREE.DoubleSide });
+
+  // For each face dir build a Group oriented to the slope, with a surface plane.
+  for (const dir of ['north','south']){
+    const sign = dir === 'north' ? 1 : -1;
+    const eaveZ = sign * (D/2 + overhang);
+    const ridgeY = ridge, eaveY = H;
+    // basis
+    const center = new THREE.Vector3(0, (ridgeY+eaveY)/2, eaveZ/2);
+    const yAxis = new THREE.Vector3(0, ridgeY - eaveY, 0 - eaveZ).normalize(); // eave->ridge (up-slope)
+    const xAxis = new THREE.Vector3(1, 0, 0);
+    const zAxis = new THREE.Vector3().crossVectors(xAxis, yAxis).normalize();   // outward normal
+    const m = new THREE.Matrix4().makeBasis(xAxis, yAxis, zAxis);
+    const grp = new THREE.Group();
+    grp.position.copy(center);
+    grp.quaternion.setFromRotationMatrix(m);
+    grp.userData = { dir };
+    scene.add(grp);
+
+    const slopeLen = Math.hypot(ridgeY - eaveY, eaveZ);
+    const surf = new THREE.Mesh(new THREE.PlaneGeometry(W + overhang*2, slopeLen), roofMat);
+    surf.receiveShadow = true; surf.castShadow = true;
+    surf.userData = { kind: 'roofFace', dir };
+    grp.add(surf);
+    grp.userData.surf = surf;
+    grp.userData.slopeLen = slopeLen;
+    roofFaces[dir] = grp;
+  }
+
+  // Gable ends (triangles) at x = +/- W/2
+  const triShape = new THREE.Shape();
+  triShape.moveTo(-(D/2+overhang), H); triShape.lineTo(D/2+overhang, H); triShape.lineTo(0, ridge); triShape.closePath();
+  const triGeo = new THREE.ShapeGeometry(triShape);
+  for (const sx of [-1, 1]){
+    const tri = new THREE.Mesh(triGeo, gableMat);
+    tri.rotation.y = sx>0 ? Math.PI/2 : -Math.PI/2;
+    tri.position.set(sx * W/2, 0, 0);
+    tri.castShadow = true; scene.add(tri);
+  }
+  // ridge beam
+  const beam = new THREE.Mesh(new THREE.BoxGeometry(W+0.1, 0.15, 0.15),
+    new THREE.MeshStandardMaterial({ color: 0x3a3f47 }));
+  beam.position.set(0, ridge, 0); scene.add(beam);
+}
+
+function buildTree(x, z){
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.32, 3.4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x6b4a2f, roughness: 1 }));
+  trunk.position.set(x, 1.7, z); trunk.castShadow = true; scene.add(trunk);
+  const folMat = new THREE.MeshStandardMaterial({ color: 0x3f7d3a, roughness: 1 });
+  for (const [dx,dy,dz,r] of [[0,3.3,0,1.6],[0.9,2.8,0.4,1.1],[-0.8,2.9,-0.3,1.2],[0.2,4.1,-0.2,1.0]]){
+    const f = new THREE.Mesh(new THREE.SphereGeometry(r, 12, 12), folMat);
+    f.position.set(x+dx, dy, z+dz); f.castShadow = true; scene.add(f);
+  }
+}
+
+function buildCompass(){
+  // N marker to +Z
+  const spr = makeLabel(' N ', '#fd8ea1');
+  spr.scale.multiplyScalar(1.4);
+  spr.position.set(0, 0.6, 11);
+  scene.add(spr);
+  const ring = new THREE.Mesh(new THREE.RingGeometry(0.9, 1.05, 32),
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent:true, opacity:.5, side: THREE.DoubleSide }));
+  ring.rotation.x = -Math.PI/2; ring.position.set(0, 0.02, 11); scene.add(ring);
+  const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.0, 4),
+    new THREE.MeshBasicMaterial({ color: 0xfd8ea1 }));
+  arrow.position.set(0, 0.5, 11); arrow.rotation.x = Math.PI/2; scene.add(arrow);
+}
+
+/* ===================== Phase 1: Orientation ===================== */
+function startPhase1(){
+  state.phase = 1; updatePhaseBar();
+  setInstruction('PHASE 1 · SITE & ASPECT', 'Pick the right roof',
+    'In NSW the sun sits in the northern sky. Orbit the house and <b>click the roof slope that should carry the panels</b> for the best year-round sun.', []);
+  // pulse both faces, make pickable
+  pickables = [roofFaces.north.userData.surf, roofFaces.south.userData.surf];
+  for (const d of ['north','south']){
+    const surf = roofFaces[d].userData.surf;
+    surf.material = surf.material.clone();
+    surf.material.emissive = new THREE.Color(0xb11f4b);
+    surf.userData._pulse = true;
+  }
+  tweenCamera(new THREE.Vector3(9, 7, 13), new THREE.Vector3(0, 3.2, 1.5), 1.1);
+}
+function chooseFace(dir){
+  if (state.phase !== 1) return;
+  // stop pulsing
+  for (const d of ['north','south']){ const s = roofFaces[d].userData.surf; s.userData._pulse=false; s.material.emissive.setHex(0x000000); }
+  if (dir === 'north'){
+    state.chosenFace = 'north';
+    roofFaces.north.userData.surf.material.emissive.setHex(0x14361f);
+    setLive('✅ North-facing — maximum annual generation. Locked in.', 'ok');
+    toast('Correct roof ✓', 'ok');
+    state.badges.push({ em:'🧭', name:'Site Surveyor' });
+    setTimeout(()=> startPhase2(), 900);
   } else {
-    renderStage();
+    state.score -= 80; setScore();
+    state.chosenFace = 'north'; // correct it for them after teaching
+    setLive('❌ That slope faces south — least sun in the Southern Hemisphere. The north slope is correct (−80).', 'bad');
+    toast('South faces away from the sun', 'bad');
+    roofFaces.north.userData.surf.material.emissive.setHex(0x14361f);
+    setTimeout(()=> startPhase2(), 1500);
   }
-  updateHeader(true);
 }
 
-/* ---------------- Home ---------------- */
-function renderHome() {
-  state.moduleIndex = 0; state.stageIndex = 0; state.score = 0; state.completed = 0; state.earnedBadges = [];
-  updateHeader(false);
-  stageLabel.textContent = "Ready to start";
-  screen.innerHTML =
-    '<div class="card">' +
-      '<div class="hero">' +
-        '<div class="badge-row">☀️ 🔋 🖥️ ⚡</div>' +
-        '<h1>Power Up! Solar, Batteries &amp; Home AI Clusters</h1>' +
-        '<p class="lede">An interactive lab for TAFE NSW learners. Plan a rooftop solar &amp; battery install, build a home GPU cluster, then run your AI lab on sunshine — making real decisions, sizing real systems, and working safely to Australian standards.</p>' +
-      '</div>' +
-      '<div class="journey">' +
-        '<div class="stop"><div class="n">MODULE 1</div><div class="em">☀️🔋</div><h3>Solar &amp; Battery Install</h3><p>Site assessment, system sizing, safe wiring and AS/NZS compliance.</p></div>' +
-        '<div class="stop"><div class="n">MODULE 2</div><div class="em">🖥️⚡</div><h3>Home GPU Cluster</h3><p>Pick hardware, budget the power, build the cluster, manage heat &amp; safety.</p></div>' +
-        '<div class="stop"><div class="n">CAPSTONE</div><div class="em">☀️➜🖥️</div><h3>Run It on Sunshine</h3><p>Size solar + storage to power your AI lab day and night.</p></div>' +
-      '</div>' +
-      '<div class="facts">' +
-        '<div class="fact"><span class="f-em">🎯</span><span>Make choices and size systems — get instant feedback and the reasoning behind every answer.</span></div>' +
-        '<div class="fact"><span class="f-em">🇦🇺</span><span>Grounded in NSW conditions: north-facing roofs, ~4.2 peak sun hours, 240&nbsp;V circuits, AS/NZS standards.</span></div>' +
-        '<div class="fact"><span class="f-em">⭐</span><span>Earn points and three badges. Aim for a Distinction on the final certificate.</span></div>' +
-      '</div>' +
-      '<div class="row-end"><button class="btn-primary" id="startBtn">Start the course →</button></div>' +
-      '<p class="disclaimer">Educational game for learning purposes. Real solar, battery and electrical work in NSW must be carried out by appropriately licensed and accredited professionals in accordance with current standards and SafeWork NSW requirements.</p>' +
-    '</div>';
-  screen.querySelector('#startBtn').addEventListener('click', () => { renderStage(); updateHeader(true); });
+/* ===================== Phase 2: Place panels ===================== */
+function startPhase2(){
+  state.phase = 2; updatePhaseBar();
+  setInstruction('PHASE 2 · MOUNT THE ARRAY', 'Place 6 solar panels',
+    `Click the empty slots on the north roof to mount panels. Panels sit flush to the roof pitch (tilt ≈ latitude). <b>Avoid the shaded slots</b> under the tree — shade on one panel drags down the whole string. Click a panel again to remove it.`, []);
+  buildSlots();
+  state.panelsPlaced = 0; state.shadedUsed = 0;
+  updatePanelLive();
+  tweenCamera(new THREE.Vector3(2.5, 9.5, 11.5), new THREE.Vector3(0, 3.6, 1.6), 1.2);
 }
-
-/* ---------------- Stage dispatch ---------------- */
-function renderStage() {
-  const mod = MODULES[state.moduleIndex];
-  const stage = mod.stages[state.stageIndex];
-  stageLabel.textContent = "Module " + (state.moduleIndex + 1) + " · " + mod.title + " — " + stage.title;
-  if (stage.type === 'quiz') return renderQuiz(mod, stage);
-  if (stage.type === 'order') return renderOrder(mod, stage);
-  if (stage.type === 'sizing') return renderSizing(mod, stage);
-}
-
-/* ---------------- Quiz ---------------- */
-function renderQuiz(mod, stage) {
-  let qi = 0;
-  function draw() {
-    const q = stage.questions[qi];
-    screen.innerHTML =
-      '<div class="card">' +
-        '<div class="stage-tag">' + mod.icon + ' ' + mod.title + ' · ' + stage.title + '</div>' +
-        '<div class="q-progress">Question ' + (qi + 1) + ' of ' + stage.questions.length + '</div>' +
-        '<h2 class="q-text">' + q.q + '</h2>' +
-        '<div class="options">' +
-          q.options.map((o, i) => '<button class="option" data-i="' + i + '"><span class="key">' + LETTERS[i] + '</span><span>' + o + '</span></button>').join('') +
-        '</div>' +
-        '<div class="feedback" id="fb" hidden></div>' +
-        '<div class="row-end"><button class="btn-primary" id="nextBtn" hidden>' + (qi < stage.questions.length - 1 ? 'Next question →' : 'Finish stage →') + '</button></div>' +
-      '</div>';
-    const fb = screen.querySelector('#fb');
-    const nextBtn = screen.querySelector('#nextBtn');
-    let answered = false;
-    const opts = Array.from(screen.querySelectorAll('.option'));
-    opts.forEach(btn => btn.addEventListener('click', () => {
-      if (answered) return;
-      answered = true;
-      const i = +btn.dataset.i;
-      const correct = i === q.answer;
-      if (correct) { state.score += 100; btn.classList.add('correct'); }
-      else { btn.classList.add('wrong'); opts[q.answer].classList.add('correct'); }
-      opts.forEach(b => b.disabled = true);
-      fb.hidden = false;
-      fb.className = 'feedback ' + (correct ? 'ok' : 'bad');
-      fb.innerHTML = '<strong>' + (correct ? '✅ Correct! ' : '❌ Not quite. ') + '</strong>' + q.explain;
-      nextBtn.hidden = false;
-      updateHeader(true);
-    }));
-    nextBtn.addEventListener('click', () => {
-      qi++;
-      if (qi < stage.questions.length) draw();
-      else advanceStage();
-    });
-  }
-  draw();
-}
-
-/* ---------------- Order ---------------- */
-function renderOrder(mod, stage) {
-  const correct = stage.items;
-  const n = correct.length;
-  let bank = shuffle(correct.map((t, i) => ({ t, pos: i })));
-  let slots = new Array(n).fill(null);
-  let checked = false;
-
-  function draw() {
-    screen.innerHTML =
-      '<div class="card">' +
-        '<div class="stage-tag">' + mod.icon + ' ' + mod.title + ' · ' + stage.title + '</div>' +
-        '<p class="lede">' + stage.intro + '</p>' +
-        '<div class="group-label">Your sequence (top → bottom)</div>' +
-        '<div class="slots" id="slots"></div>' +
-        '<div class="group-label">Available steps — tap to place</div>' +
-        '<div class="bank" id="bank"></div>' +
-        '<div class="feedback" id="fb" hidden></div>' +
-        '<div class="row-between" style="margin-top:18px">' +
-          '<button class="btn-ghost" id="resetBtn">↺ Reset</button>' +
-          '<div style="display:flex;gap:10px">' +
-            '<button class="btn-primary" id="checkBtn">Check order</button>' +
-            '<button class="btn-primary" id="contBtn" hidden>Continue →</button>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    paint();
-    screen.querySelector('#resetBtn').addEventListener('click', () => {
-      if (checked) return;
-      bank = shuffle(correct.map((t, i) => ({ t, pos: i })));
-      slots = new Array(n).fill(null);
-      paint();
-    });
-    screen.querySelector('#checkBtn').addEventListener('click', check);
-    screen.querySelector('#contBtn').addEventListener('click', advanceStage);
-  }
-
-  function paint() {
-    const slotsEl = screen.querySelector('#slots');
-    const bankEl = screen.querySelector('#bank');
-    slotsEl.innerHTML = slots.map((s, i) => {
-      let cls = 'slot' + (s ? ' filled' : '');
-      if (checked && s) cls += (s.pos === i ? ' ok' : ' no');
-      const inner = s
-        ? '<button class="chip-item" data-slot="' + i + '">' + s.t + (checked ? (s.pos === i ? ' ✓' : ' ✗') : '') + '</button>'
-        : '<span class="muted">Tap a step below…</span>';
-      return '<div class="' + cls + '"><span class="num">' + (i + 1) + '</span>' + inner + '</div>';
-    }).join('');
-    bankEl.innerHTML = bank.length
-      ? bank.map((b, i) => '<button class="chip-item" data-bank="' + i + '">' + b.t + '</button>').join('')
-      : '<span class="muted">All steps placed.</span>';
-    if (!checked) {
-      bankEl.querySelectorAll('[data-bank]').forEach(btn => btn.addEventListener('click', () => {
-        const idx = +btn.dataset.bank;
-        const free = slots.indexOf(null);
-        if (free === -1) return;
-        slots[free] = bank[idx];
-        bank.splice(idx, 1);
-        paint();
-      }));
-      slotsEl.querySelectorAll('[data-slot]').forEach(btn => btn.addEventListener('click', () => {
-        const idx = +btn.dataset.slot;
-        bank.push(slots[idx]);
-        slots[idx] = null;
-        paint();
-      }));
-    }
-  }
-
-  function check() {
-    if (slots.includes(null)) {
-      const fb = screen.querySelector('#fb');
-      fb.hidden = false; fb.className = 'feedback bad';
-      fb.innerHTML = '<strong>Fill every slot first.</strong> Place all the steps before checking.';
-      return;
-    }
-    checked = true;
-    let right = 0;
-    slots.forEach((s, i) => { if (s.pos === i) right++; });
-    const earned = Math.round(100 * right / n);
-    state.score += earned;
-    paint();
-    const fb = screen.querySelector('#fb');
-    fb.hidden = false;
-    fb.className = 'feedback ' + (right === n ? 'ok' : 'bad');
-    fb.innerHTML = '<strong>' + (right === n ? '✅ Perfect sequence! ' : '⚠️ ' + right + ' of ' + n + ' in the right spot. ') + '</strong>' + stage.explain + ' <em>(+' + earned + ' pts)</em>';
-    screen.querySelector('#checkBtn').hidden = true;
-    screen.querySelector('#resetBtn').disabled = true;
-    screen.querySelector('#contBtn').hidden = false;
-    updateHeader(true);
-  }
-
-  draw();
-}
-
-/* ---------------- Sizing ---------------- */
-function renderSizing(mod, stage) {
-  const vals = {};
-  stage.controls.forEach(c => vals[c.id] = c.start);
-  let checked = false;
-
-  function fmt(c) { return (+vals[c.id]).toFixed(c.dp) + ' ' + c.unit; }
-
-  function draw() {
-    screen.innerHTML =
-      '<div class="card">' +
-        '<div class="stage-tag">' + mod.icon + ' ' + mod.title + ' · ' + stage.title + '</div>' +
-        '<p class="lede">' + stage.intro + '</p>' +
-        stage.controls.map(c =>
-          '<div class="control">' +
-            '<div class="lab"><span class="name">' + c.label + '</span><span class="val" id="val-' + c.id + '">' + fmt(c) + '</span></div>' +
-            '<input type="range" id="rng-' + c.id + '" min="' + c.min + '" max="' + c.max + '" step="' + c.step + '" value="' + c.start + '">' +
-            '<div class="target-hint" id="hint-' + c.id + '" hidden></div>' +
-          '</div>'
-        ).join('') +
-        '<div class="readout" id="readout"></div>' +
-        '<div class="feedback" id="fb" hidden></div>' +
-        '<div class="row-end">' +
-          '<button class="btn-primary" id="checkBtn">Lock in design</button>' +
-          '<button class="btn-primary" id="contBtn" hidden>Continue →</button>' +
-        '</div>' +
-      '</div>';
-    stage.controls.forEach(c => {
-      const rng = screen.querySelector('#rng-' + c.id);
-      rng.addEventListener('input', () => {
-        vals[c.id] = +rng.value;
-        screen.querySelector('#val-' + c.id).textContent = fmt(c);
-        liveUpdate();
+function buildSlots(){
+  clearSlots();
+  const grp = roofFaces.north;
+  const cols = 4, rows = 2;
+  const slopeLen = grp.userData.slopeLen;
+  const usableW = HOUSE.W - 0.8, usableH = slopeLen - 0.7;
+  const pw = usableW/cols, ph = usableH/rows;
+  slotMeshes = [];
+  for (let r=0; r<rows; r++){
+    for (let c=0; c<cols; c++){
+      const lx = -usableW/2 + pw*(c+0.5);
+      const ly = -usableH/2 + ph*(r+0.5);
+      const shaded = (c >= cols-1); // rightmost column under the tree (NE)
+      const geo = new THREE.PlaneGeometry(pw*0.86, ph*0.86);
+      const mat = new THREE.MeshStandardMaterial({
+        color: shaded ? 0x2b3340 : 0x7da7d9,
+        transparent: true, opacity: shaded ? 0.55 : 0.42,
+        emissive: shaded ? 0x000000 : 0x14304f, side: THREE.DoubleSide
       });
-    });
-    screen.querySelector('#checkBtn').addEventListener('click', check);
-    screen.querySelector('#contBtn').addEventListener('click', advanceStage);
-    liveUpdate();
+      const slot = new THREE.Mesh(geo, mat);
+      slot.position.set(lx, ly, 0.06);
+      slot.userData = { kind:'slot', shaded, filled:false, col:c, row:r, lx, ly, pw, ph };
+      grp.add(slot);
+      slotMeshes.push(slot);
+      if (shaded){
+        const sh = makeLabel('shade', '#fbbf24'); sh.scale.multiplyScalar(0.5);
+        sh.position.set(lx, ly, 0.5); grp.add(sh); slot.userData.shadeLbl = sh;
+      }
+    }
   }
-
-  function liveUpdate() {
-    const r = stage.compute(vals);
-    screen.querySelector('#readout').innerHTML = r.readout;
-    return r;
+  pickables = slotMeshes.slice();
+}
+function clearSlots(){
+  const grp = roofFaces.north;
+  for (const s of slotMeshes){ if (s.userData.shadeLbl) grp.remove(s.userData.shadeLbl); grp.remove(s); }
+  slotMeshes = [];
+}
+function toggleSlot(slot){
+  if (state.phase !== 2) return;
+  const grp = roofFaces.north;
+  if (slot.userData.filled){
+    grp.remove(slot.userData.panel); slot.userData.filled = false; slot.userData.panel = null;
+    slot.visible = true;
+    state.panelsPlaced--;
+    if (slot.userData.shaded) state.shadedUsed--;
+    updatePanelLive(); return;
   }
-
-  function check() {
-    const r = stage.compute(vals);
-    const targets = r.targets;
-    const keys = Object.keys(targets);
-    let inRange = 0;
-    checked = true;
-    keys.forEach(k => {
-      const c = stage.controls.find(x => x.id === k);
-      const [lo, hi] = targets[k];
-      const ok = vals[k] >= lo && vals[k] <= hi;
-      if (ok) inRange++;
-      const hint = screen.querySelector('#hint-' + k);
-      hint.hidden = false;
-      hint.className = 'target-hint ' + (ok ? 'ok' : 'no');
-      hint.textContent = (ok ? '✓ In the ideal range' : '✗ Aim for') + ' ' + (+lo).toFixed(c.dp) + '–' + (+hi).toFixed(c.dp) + ' ' + c.unit;
-    });
-    const earned = Math.round(100 * inRange / keys.length);
-    state.score += earned;
-    const fb = screen.querySelector('#fb');
-    fb.hidden = false;
-    fb.className = 'feedback ' + (inRange === keys.length ? 'ok' : 'bad');
-    const head = inRange === keys.length ? '✅ Well sized! ' : '⚠️ ' + inRange + ' of ' + keys.length + ' in the ideal range. ';
-    fb.innerHTML = '<strong>' + head + '</strong>' + r.tip + ' <em>(+' + earned + ' pts)</em>';
-    screen.querySelector('#checkBtn').hidden = true;
-    screen.querySelector('#contBtn').hidden = false;
-    stage.controls.forEach(c => { screen.querySelector('#rng-' + c.id).disabled = true; });
-    updateHeader(true);
-  }
-
-  draw();
+  if (state.panelsPlaced >= state.panelsTarget){ toast('All 6 placed — remove one to change', 'warn'); return; }
+  const panel = makePanel(slot.userData.pw*0.9, slot.userData.ph*0.86);
+  panel.position.set(slot.userData.lx, slot.userData.ly, 0.12);
+  grp.add(panel);
+  slot.userData.filled = true; slot.userData.panel = panel; slot.visible = false;
+  placedPanels.push(panel);
+  state.panelsPlaced++;
+  if (slot.userData.shaded){ state.shadedUsed++; state.score -= 40; setScore();
+    setLive('⚠️ That panel is shaded — it’ll underperform and hurt the string (−40).', 'warn');
+    toast('Shaded panel placed', 'warn');
+  } else { setLive('', ''); }
+  updatePanelLive();
+  if (state.panelsPlaced === state.panelsTarget){
+    if (state.shadedUsed === 0){ state.badges.push({ em:'🔆', name:'Array Ace' }); }
+    showNext('Wire it up →', startPhase3);
+  } else { hideNext(); }
+}
+function makePanel(w, h){
+  const grp = new THREE.Group();
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.08),
+    new THREE.MeshStandardMaterial({ color: 0xb9c0cc, metalness:.5, roughness:.4 }));
+  frame.castShadow = true; grp.add(frame);
+  const glass = new THREE.Mesh(new THREE.BoxGeometry(w*0.92, h*0.9, 0.09),
+    new THREE.MeshStandardMaterial({ color: 0x16284a, metalness:.3, roughness:.2, emissive:0x0a1830 }));
+  grp.add(glass);
+  // cell grid lines
+  for (let i=1;i<4;i++){ const ln=new THREE.Mesh(new THREE.BoxGeometry(w*0.92,0.015,0.1),
+    new THREE.MeshBasicMaterial({color:0x2a3f63})); ln.position.y=-h*0.45+ (h*0.9)*i/4; grp.add(ln); }
+  grp.userData.glass = glass;
+  return grp;
+}
+function updatePanelLive(){
+  const el = document.getElementById('insLive');
+  if (state.panelsPlaced < state.panelsTarget && el.className.indexOf('warn')===-1)
+    setLive(`Panels mounted: ${state.panelsPlaced} / ${state.panelsTarget}`, '');
+  else if (state.panelsPlaced < state.panelsTarget)
+    el.textContent = `Panels mounted: ${state.panelsPlaced} / ${state.panelsTarget}`;
 }
 
-/* ---------------- Module complete ---------------- */
-function renderModuleComplete(mod) {
-  const last = state.moduleIndex >= MODULES.length - 1;
-  stageLabel.textContent = "Module " + (state.moduleIndex + 1) + " complete";
-  screen.innerHTML =
-    '<div class="card center">' +
-      '<div class="medal">' + mod.badge.em + '</div>' +
-      '<h1>Module ' + (state.moduleIndex + 1) + ' complete!</h1>' +
-      '<p class="lede">' + mod.title + ' — nicely done.</p>' +
-      '<div class="badge-earned">' + mod.badge.em + ' Badge unlocked: ' + mod.badge.name + '</div>' +
-      '<div style="margin-top:8px" class="muted">Running score: <b>' + state.score + '</b> pts</div>' +
-      '<div class="row-end" style="justify-content:center;margin-top:22px">' +
-        '<button class="btn-primary" id="nextMod">' + (last ? 'See your certificate →' : 'Next module →') + '</button>' +
-      '</div>' +
-    '</div>';
-  screen.querySelector('#nextMod').addEventListener('click', () => {
-    state.moduleIndex++;
-    state.stageIndex = 0;
-    if (state.moduleIndex >= MODULES.length) renderFinal();
-    else { renderStage(); updateHeader(true); }
-  });
+/* ===================== Phase 3: Wire it up ===================== */
+const WIRE_SEQ = [
+  { id:'array',  label:'PV Array',    color:'#7da7d9' },
+  { id:'dciso',  label:'DC Isolator', color:'#f6c453' },
+  { id:'inv',    label:'Inverter',    color:'#eceae5' },
+  { id:'aciso',  label:'AC Isolator', color:'#f6c453' },
+  { id:'board',  label:'Switchboard', color:'#cbd2db' },
+  { id:'meter',  label:'Meter / Grid',color:'#7fb3ff' }
+];
+function startPhase3(){
+  state.phase = 3; updatePhaseBar(); hideNext();
+  // dim slots
+  for (const s of slotMeshes){ s.visible = false; }
+  setInstruction('PHASE 3 · WIRE IT SAFELY', 'Connect the energy path',
+    'Click the components in the correct order the energy flows — from the panels to the grid. Isolators each side of the inverter let you switch off safely (AS/NZS 5033 &amp; 4777).', []);
+  buildWireNodes();
+  state.wireIndex = 0; state.wireMistakes = 0;
+  setLive('Next: click the PV Array to start.', '');
+  tweenCamera(new THREE.Vector3(8.5, 5.6, 14), new THREE.Vector3(0.4, 2.5, 2.2), 1.2);
+}
+function nodePos(id){
+  const D = HOUSE.D/2 + 0.06;
+  switch(id){
+    case 'array': return new THREE.Vector3(0, 3.9, 1.6);
+    case 'dciso': return new THREE.Vector3(-2.4, 2.3, D);
+    case 'inv':   return new THREE.Vector3(-1.0, 1.7, D);
+    case 'aciso': return new THREE.Vector3(0.4, 2.3, D);
+    case 'board': return new THREE.Vector3(1.9, 1.7, D);
+    case 'meter': return new THREE.Vector3(3.3, 1.1, D);
+  }
+}
+function buildWireNodes(){
+  clearWireNodes();
+  wireNodes = [];
+  for (const spec of WIRE_SEQ){
+    if (spec.id === 'array'){
+      // invisible clickable marker on roof + use panels visually
+      const m = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.4, 0.3),
+        new THREE.MeshBasicMaterial({ color: 0x7da7d9, transparent:true, opacity:0.0 }));
+      m.position.copy(nodePos('array'));
+      m.userData = { kind:'node', id:'array', wired:false };
+      scene.add(m); wireNodes.push(m);
+      const lbl = makeLabel('PV Array', '#cfe2ff'); lbl.position.copy(nodePos('array')).add(new THREE.Vector3(0,1.0,0));
+      scene.add(lbl); m.userData.lbl = lbl;
+      continue;
+    }
+    const box = makeComponent(spec);
+    box.position.copy(nodePos(spec.id));
+    box.userData = { kind:'node', id:spec.id, wired:false, base: box.children[0].material };
+    scene.add(box); wireNodes.push(box);
+    const lbl = makeLabel(spec.label, '#ffffff');
+    const hiLab = (spec.id === 'dciso' || spec.id === 'aciso');
+    lbl.position.copy(nodePos(spec.id)).add(new THREE.Vector3(0, hiLab ? 1.35 : 0.52, 0));
+    scene.add(lbl); box.userData.lbl = lbl;
+  }
+  // battery (context, auto-wired at commissioning)
+  const batt = makeComponent({ id:'batt', label:'Battery', color:'#2f9e8f' }, 0.9, 1.4, 0.5);
+  batt.position.set(-1.0, 0.75, HOUSE.D/2 + 0.06);
+  scene.add(batt); window._battMesh = batt;
+  const bl = makeLabel('Battery', '#bff0e6'); bl.position.set(-1.0, 1.55, HOUSE.D/2 + 0.06); scene.add(bl);
+  pickables = wireNodes.slice();
+}
+function makeComponent(spec, w=0.7, h=0.95, d=0.45){
+  const grp = new THREE.Group();
+  const col = new THREE.Color(spec.color);
+  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d),
+    new THREE.MeshStandardMaterial({ color: col, roughness:.6, metalness:.15, emissive: 0x000000 }));
+  body.castShadow = true; grp.add(body);
+  if (spec.id === 'dciso' || spec.id === 'aciso'){
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.32, 0.12),
+      new THREE.MeshStandardMaterial({ color: 0xb11f4b }));
+    handle.position.set(0, -0.1, d/2+0.05); grp.add(handle);
+  }
+  return grp;
+}
+function clearWireNodes(){
+  for (const n of wireNodes){ if (n.userData.lbl) scene.remove(n.userData.lbl); scene.remove(n); }
+  wireNodes = [];
+}
+function clickNode(node){
+  if (state.phase !== 3) return;
+  const id = node.userData.id;
+  const expected = WIRE_SEQ[state.wireIndex].id;
+  if (id !== expected){
+    state.wireMistakes++; state.score = Math.max(0, state.score - 25); setScore();
+    flashNode(node, 0x7a1020);
+    const want = WIRE_SEQ[state.wireIndex].label;
+    setLive(`❌ Not next. Energy must reach <b>${want}</b> first (−25).`, 'bad');
+    toast('Wrong order', 'bad');
+    return;
+  }
+  node.userData.wired = true;
+  lightNode(node);
+  if (state.wireIndex > 0){ drawWire(wireNodes[state.wireIndex-1], node); }
+  state.wireIndex++;
+  if (state.wireIndex < WIRE_SEQ.length){
+    setLive(`✅ ${WIRE_SEQ[state.wireIndex-1].label} connected. Next: <b>${WIRE_SEQ[state.wireIndex].label}</b>.`, 'ok');
+  } else {
+    // wire battery to inverter
+    drawWire(wireNodes[2], { position: window._battMesh.position }, 0x2f9e8f);
+    setLive('✅ Fully wired and isolatable. Ready to commission.', 'ok');
+    if (state.wireMistakes === 0) state.badges.push({ em:'🔌', name:'Safe Sparky' });
+    showNext('⚡ Energize & run a day →', startPhase4);
+  }
+}
+function lightNode(node){
+  const body = node.children && node.children[0];
+  if (body && body.material && body.material.emissive){ body.material.emissive.setHex(0x14361f); }
+  if (node.userData.id === 'array'){ for (const p of placedPanels){ p.userData.glass.material.emissive.setHex(0x123a6b); } }
+}
+function flashNode(node, hex){
+  const body = node.children && node.children[0];
+  if (!body || !body.material || !body.material.emissive) return;
+  const prev = body.material.emissive.getHex();
+  body.material.emissive.setHex(hex);
+  setTimeout(()=> body.material.emissive.setHex(node.userData.wired ? 0x14361f : prev), 280);
+}
+function drawWire(a, b, color){
+  const pa = a.position.clone(), pb = b.position.clone();
+  const mid = pa.clone().lerp(pb, 0.5);
+  mid.add(new THREE.Vector3(0, -0.4 - pa.distanceTo(pb)*0.06, 0.25));
+  const curve = new THREE.CatmullRomCurve3([pa, mid, pb]);
+  const geo = new THREE.TubeGeometry(curve, 24, 0.05, 8, false);
+  const mat = new THREE.MeshStandardMaterial({ color: color||0x2a2a2a, emissive: 0x000000, roughness:.5 });
+  const tube = new THREE.Mesh(geo, mat); tube.castShadow = true; scene.add(tube);
+  wireCurves.push({ curve, mat });
 }
 
-/* ---------------- Final ---------------- */
-function renderFinal() {
-  const pct = Math.round(state.score / totalMax * 100);
-  let grade, blurb;
-  if (pct >= 85) { grade = "High Distinction"; blurb = "Outstanding — you sized, sequenced and reasoned like a pro."; }
-  else if (pct >= 75) { grade = "Distinction"; blurb = "Strong work across solar, storage and compute."; }
-  else if (pct >= 65) { grade = "Credit"; blurb = "Solid grasp of the fundamentals — review the trickier sizing for full marks."; }
-  else if (pct >= 50) { grade = "Pass"; blurb = "You're on your way — replay to sharpen the calculations and standards."; }
-  else { grade = "Keep practising"; blurb = "Have another go — the feedback after each answer is the fast track to improving."; }
-
-  stageLabel.textContent = "Course complete";
-  progFill.style.width = "100%";
-  screen.innerHTML =
-    '<div class="card center">' +
-      '<div class="cert">' +
-        '<div class="seal">🏅</div>' +
-        '<div class="muted" style="letter-spacing:.08em;font-size:.8rem;font-weight:700">TAFE NSW · MICRO-CREDENTIAL (PRACTICE)</div>' +
-        '<h2>Solar, Batteries &amp; Home AI Clusters</h2>' +
-        '<div class="score-big">' + pct + '%</div>' +
-        '<div class="grade">' + grade + '</div>' +
-        '<p class="muted" style="max-width:520px;margin:10px auto 0">' + blurb + '</p>' +
-        '<div class="tag-list">' +
-          MODULES.map(m => '<span class="badge-earned">' + m.badge.em + ' ' + m.badge.name + '</span>').join('') +
-        '</div>' +
-      '</div>' +
-      '<div class="facts" style="max-width:560px;margin:22px auto 0;text-align:left">' +
-        '<div class="fact"><span class="f-em">☀️</span><span>North-facing array, tilt ≈ latitude, sized to daily kWh ÷ (sun hours × performance ratio).</span></div>' +
-        '<div class="fact"><span class="f-em">🔌</span><span>Isolate &amp; test before you touch; AS/NZS 5033 / 4777 / 5139; CEC-accredited installers for STCs.</span></div>' +
-        '<div class="fact"><span class="f-em">🖥️</span><span>PSU at ~1.2–1.6× draw, dedicated circuits for big nodes, airflow to beat thermal throttling.</span></div>' +
-        '<div class="fact"><span class="f-em">⚡</span><span>Battery storage + daytime load-shifting lets a solar lab run after sunset.</span></div>' +
-      '</div>' +
-      '<div class="row-end" style="justify-content:center;margin-top:24px">' +
-        '<button class="btn-ghost" id="reviewBtn">Replay course</button>' +
-        '<button class="btn-primary" id="printBtn">🖨️ Print certificate</button>' +
-      '</div>' +
-      '<p class="disclaimer">Practice micro-credential for learning only — not a formal qualification. Always engage licensed/accredited professionals for real installations in NSW.</p>' +
-    '</div>';
-  screen.querySelector('#reviewBtn').addEventListener('click', renderHome);
-  screen.querySelector('#printBtn').addEventListener('click', () => window.print());
+/* ===================== Phase 4: Commission ===================== */
+let sim = null;
+function startPhase4(){
+  state.phase = 4; updatePhaseBar(); hideNext();
+  setInstruction('PHASE 4 · COMMISSION', 'Switch on the sun',
+    'Isolate, test, then energise. Watch a solar day: generation flows along the wires, the battery banks the surplus, and after sunset your stored energy keeps the home running.', []);
+  document.getElementById('gauges').style.display = 'block';
+  pickables = [];
+  // light wires
+  for (const w of wireCurves){ w.mat.emissive = new THREE.Color(0xffb547); w.mat.emissiveIntensity = 0; }
+  // efficiency from shading
+  const good = state.panelsTarget - state.shadedUsed;
+  const kWp = state.panelsTarget * 0.44;           // ~0.44 kW per panel → ~2.6 kWp
+  const effFactor = (good + state.shadedUsed*0.45) / state.panelsTarget;
+  sim = { t: 0, dur: 16, kWp, effFactor, soc: 0.5, kwh: 0, peak: 0, done: false };
+  spawnPulses();
+}
+function spawnPulses(){
+  energyPulses.forEach(p => scene.remove(p.mesh));
+  energyPulses = [];
+  for (let i=0;i<wireCurves.length;i++){
+    const m = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 10),
+      new THREE.MeshBasicMaterial({ color: 0xffd97a }));
+    m.visible = false; scene.add(m);
+    energyPulses.push({ mesh:m, curve: wireCurves[i].curve, t: Math.random(), spd: 0.5 + Math.random()*0.3 });
+  }
+}
+function updateSim(dt){
+  if (!sim || sim.done) return;
+  sim.t += dt;
+  const p = Math.min(1, sim.t / sim.dur);
+  const dayT = p;                       // 0..1 across the day
+  setSun(dayT);
+  const el = Math.max(0, Math.sin(Math.PI * dayT));
+  const genKW = sim.kWp * el * sim.effFactor;
+  sim.peak = Math.max(sim.peak, genKW);
+  // energy bookkeeping — scaled so a full run ≈ kWp × 4.2 peak-sun-hours × eff
+  const houseLoadKW = 0.4;              // baseline home load (lights/fridge) for the demo
+  const net = genKW - houseLoadKW;
+  const hoursStep = (dt/sim.dur) * 24; // sim spans ~24h
+  sim.kwh += Math.max(0, genKW) * (dt/sim.dur) * (4.2 * Math.PI / 2);
+  // battery (usable kWh)
+  const cap = 10;
+  sim.soc += (net * hoursStep) / cap;
+  sim.soc = Math.min(1, Math.max(0.05, sim.soc));
+  // pulses active only while generating
+  const generating = genKW > 0.05;
+  for (const pl of energyPulses){
+    pl.mesh.visible = generating;
+    if (generating){ pl.t = (pl.t + dt*pl.spd) % 1; pl.mesh.position.copy(pl.curve.getPoint(pl.t)); }
+  }
+  for (const w of wireCurves){ w.mat.emissiveIntensity = generating ? 0.9 : 0.0; }
+  // home windows glow after dusk
+  const dusk = el < 0.12;
+  if (window._winMat){ window._winMat.emissive.setHex(dusk ? 0xffcf6e : 0x000000); }
+  document.getElementById('homeState').textContent = generating ? 'on solar ☀️' : (sim.soc>0.06 ? 'on battery 🔋' : 'grid');
+  // gauges
+  document.getElementById('sunPct').textContent = Math.round(el*100)+'%';
+  document.getElementById('sunBar').style.width = (el*100)+'%';
+  document.getElementById('genVal').textContent = genKW.toFixed(1)+' kW';
+  document.getElementById('genBar').style.width = Math.min(100,(genKW/sim.kWp)*100)+'%';
+  document.getElementById('battPct').textContent = Math.round(sim.soc*100)+'%';
+  document.getElementById('battBar').style.width = (sim.soc*100)+'%';
+  const hh = 6 + Math.floor(dayT*14); const mm = Math.floor((dayT*14*60)%60);
+  document.getElementById('clockLbl').textContent = String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')+'  ·  '+sim.kwh.toFixed(1)+' kWh today';
+  if (p >= 1){ sim.done = true; finishSim(); }
+}
+function finishSim(){
+  // award for storage surviving the evening
+  if (sim.soc > 0.2){ state.badges.push({ em:'🔋', name:'Night Owl Storage' }); }
+  setLive(`✅ Day complete — generated ~${sim.kwh.toFixed(1)} kWh, battery at ${Math.round(sim.soc*100)}%.`, 'ok');
+  showNext('See your results →', showResults);
 }
 
-/* ---------------- Go ---------------- */
-renderHome();
+/* ===================== Results ===================== */
+function showResults(){
+  state.phase = 5; updatePhaseBar();
+  const pct = Math.max(0, Math.round(state.score / state.maxScore * 100));
+  let grade, blurb, medal;
+  if (pct>=90){ grade='High Distinction'; medal='🏆'; blurb='Textbook install — right aspect, clean array, safe wiring and solid storage.'; }
+  else if (pct>=78){ grade='Distinction'; medal='🥇'; blurb='Strong, compliant install with smart design choices.'; }
+  else if (pct>=66){ grade='Credit'; medal='🥈'; blurb='Good work — tidy up shading and wiring order for full marks.'; }
+  else if (pct>=50){ grade='Pass'; medal='🥉'; blurb='You got it working — replay to sharpen aspect, shade and sequence.'; }
+  else { grade='Keep practising'; medal='🛠️'; blurb='Have another go — the on-screen feedback is the fast track.'; }
+  document.getElementById('resMedal').textContent = medal;
+  document.getElementById('resPct').textContent = pct+'%';
+  document.getElementById('resGrade').textContent = grade;
+  document.getElementById('resBlurb').textContent = blurb;
+  // dedupe badges
+  const seen = new Set(); const uniq = [];
+  for (const b of state.badges){ if (!seen.has(b.name)){ seen.add(b.name); uniq.push(b); } }
+  document.getElementById('resBadges').innerHTML = uniq.length
+    ? uniq.map(b=>`<span class="badge-earned">${b.em} ${b.name}</span>`).join('')
+    : '<span class="muted">No badges this run — replay to earn them!</span>';
+  document.getElementById('resultOverlay').classList.remove('hidden');
+}
+
+/* ===================== HUD wiring ===================== */
+const PHASES = [
+  { n:1, lbl:'Aspect' }, { n:2, lbl:'Panels' }, { n:3, lbl:'Wiring' }, { n:4, lbl:'Commission' }
+];
+function updatePhaseBar(){
+  document.getElementById('phasebar').innerHTML = PHASES.map(p=>{
+    const cls = state.phase===p.n ? 'active' : (state.phase>p.n ? 'done' : '');
+    return `<div class="dot ${cls}"><span class="n">${state.phase>p.n?'✓':p.n}</span><span class="lbl">${p.lbl}</span></div>`;
+  }).join('');
+}
+function setInstruction(tag, title, body, btns){
+  document.getElementById('insTag').textContent = tag;
+  document.getElementById('insTitle').textContent = title;
+  document.getElementById('insBody').innerHTML = body;
+  document.getElementById('insLive').textContent = '';
+  document.getElementById('insLive').className = 'live';
+  document.getElementById('insBtns').innerHTML = '';
+}
+function setLive(html, kind){
+  const el = document.getElementById('insLive');
+  el.innerHTML = html; el.className = 'live ' + (kind||'');
+}
+function showNext(label, fn){
+  const b = document.getElementById('insBtns');
+  b.innerHTML = '';
+  const btn = document.createElement('button'); btn.className='btn-primary'; btn.textContent=label;
+  btn.onclick = fn; b.appendChild(btn);
+}
+function hideNext(){ document.getElementById('insBtns').innerHTML=''; }
+
+/* ===================== Interaction ===================== */
+let downPos = null;
+function onPointerDown(e){ downPos = { x:e.clientX, y:e.clientY }; }
+function onPointerUp(e){
+  if (!downPos) return;
+  const moved = Math.hypot(e.clientX-downPos.x, e.clientY-downPos.y);
+  downPos = null;
+  if (moved > 6) return;            // was an orbit drag
+  pointer.x = (e.clientX/innerWidth)*2 - 1;
+  pointer.y = -(e.clientY/innerHeight)*2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(pickables, true);
+  if (!hits.length) return;
+  // resolve to a registered pickable (walk up parents)
+  let obj = hits[0].object;
+  let reg = null;
+  while (obj){ if (pickables.includes(obj)){ reg = obj; break; } obj = obj.parent; }
+  if (!reg) reg = hits[0].object;
+  const kind = reg.userData.kind;
+  if (kind === 'roofFace') chooseFace(reg.userData.dir);
+  else if (kind === 'slot') toggleSlot(reg);
+  else if (kind === 'node') clickNode(reg);
+}
+
+/* ===================== Camera tween ===================== */
+function tweenCamera(toPos, toTarget, dur){
+  camTween.fromP.copy(camera.position); camTween.toP.copy(toPos);
+  camTween.fromT.copy(controls.target); camTween.toT.copy(toTarget);
+  camTween.t = 0; camTween.dur = dur||1; camTween.active = true;
+}
+
+/* ===================== Loop ===================== */
+function animate(){
+  requestAnimationFrame(animate);
+  const dt = Math.min(0.05, clock.getDelta());
+  const t = performance.now()*0.003;
+
+  // pulse roof faces in phase 1
+  if (state.phase === 1){
+    for (const d of ['north','south']){
+      const s = roofFaces[d].userData.surf;
+      if (s.userData._pulse){ const k = 0.5+0.5*Math.sin(t*2.2); s.material.emissive.setRGB(0.35*k, 0.06*k, 0.13*k); }
+    }
+  }
+  // slot pulse phase 2
+  if (state.phase === 2){
+    for (const s of slotMeshes){ if (!s.userData.filled && !s.userData.shaded){ s.material.opacity = 0.32+0.12*Math.sin(t*3+s.userData.col); } }
+  }
+  // available-node pulse phase 3
+  if (state.phase === 3){
+    const next = WIRE_SEQ[state.wireIndex];
+    for (const n of wireNodes){
+      const body = n.children && n.children[0];
+      if (!n.userData.wired && body && body.material && body.material.emissive && n.userData.id===next.id){
+        const k=0.5+0.5*Math.sin(t*3); body.material.emissive.setRGB(0.45*k,0.32*k,0.05*k);
+      }
+    }
+  }
+
+  if (camTween.active){
+    camTween.t += dt/camTween.dur;
+    const k = easeInOut(Math.min(1, camTween.t));
+    camera.position.lerpVectors(camTween.fromP, camTween.toP, k);
+    controls.target.lerpVectors(camTween.fromT, camTween.toT, k);
+    if (camTween.t >= 1) camTween.active = false;
+  }
+  updateSim(dt);
+  controls.update();
+  renderer.render(scene, camera);
+}
+function onResize(){
+  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+}
+
+/* ===================== Boot ===================== */
+function boot(){
+  try { buildScene(); }
+  catch(e){
+    document.getElementById('loading').style.display='none';
+    document.getElementById('err').style.display='grid';
+    document.getElementById('errMsg').textContent = 'WebGL init failed: ' + e.message;
+    throw e;
+  }
+  updatePhaseBar();
+  animate();
+  document.getElementById('loading').style.display='none';
+}
+boot();
+
+document.getElementById('startBtn').onclick = () => {
+  document.getElementById('introOverlay').classList.add('hidden');
+  startPhase1();
+};
+document.getElementById('replayBtn').onclick = () => location.reload();
+document.getElementById('themeBtn').onclick = () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  document.documentElement.setAttribute('data-theme', cur==='dark'?'light':'dark');
+};
+document.getElementById('resetCam').onclick = () => tweenCamera(new THREE.Vector3(10,7,12), new THREE.Vector3(0,2.4,0), 0.9);
+
+/* ===================== Test hooks ===================== */
+window.__game = {
+  get state(){ return state; },
+  phase(){ return state.phase; },
+  start(){ document.getElementById('startBtn').click(); },
+  pickRoof(dir){ chooseFace(dir||'north'); },
+  fillPanels(){ for (const s of slotMeshes){ if (!s.userData.shaded && state.panelsPlaced<state.panelsTarget) toggleSlot(s); } },
+  wireAll(){ for (let g=0; g<WIRE_SEQ.length+2 && state.wireIndex<WIRE_SEQ.length; g++){ const next=WIRE_SEQ[state.wireIndex]; const node=wireNodes.find(n=>n.userData.id===next.id); if(node) clickNode(node);} },
+  energize(){ startPhase4(); },
+  fastForward(){ if (sim){ for (let i=0;i<240 && sim && !sim.done;i++){ updateSim(sim.dur/240); } } },
+  results(){ showResults(); },
+  ready: true
+};
 </script>
 </body>
 </html>
