@@ -651,7 +651,19 @@ function startPhase3(){
   buildWireNodes();
   state.wireIndex = 0; state.wireMistakes = 0; state.arrayWired = false;
   setLive('Next: click the PV Array to start.', '');
-  tweenCamera(new THREE.Vector3(8.5, 5.6, 14), new THREE.Vector3(0.4, 2.5, 2.2), 1.2);
+  const p = phase3CamPose();
+  tweenCamera(p.pos, p.target, 1.2);
+}
+// A near-frontal Phase-3 camera whose distance adapts to the viewport aspect,
+// so every component (and its label) stays on-screen — even in narrow/portrait.
+function phase3CamPose(){
+  const T = new THREE.Vector3(0.45, 2.15, 2.6);
+  const halfW = 2.95, halfH = 1.7, margin = 1.3;   // component+label bounding half-extents
+  const tanV = Math.tan((camera.fov * Math.PI/180)/2);
+  const a = Math.max(0.0001, camera.aspect);
+  const d = Math.max((halfH*margin)/tanV, (halfW*margin)/(tanV*a));
+  const dir = new THREE.Vector3(0.10, 0.24, 1.0).normalize();
+  return { pos: T.clone().add(dir.multiplyScalar(d)), target: T };
 }
 function nodePos(id){
   const D = HOUSE.D/2 + 0.06;
@@ -667,6 +679,7 @@ function nodePos(id){
 function buildWireNodes(){
   clearWireNodes();
   wireNodes = [];
+  const labels = [];
   for (const spec of WIRE_SEQ){
     if (spec.id === 'array'){
       // visible combiner/junction box where panel cabling gathers (clearly clickable + pulses)
@@ -677,11 +690,14 @@ function buildWireNodes(){
       const conduit = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.5, 8),
         new THREE.MeshStandardMaterial({ color: 0xc2c7cf, metalness:.3, roughness:.5 }));
       conduit.position.set(0.18, -0.5, 0); grp.add(conduit);
+      const hit = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.95, 0.7),
+        new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false }));
+      hit.userData.isHit = true; grp.add(hit);
       grp.position.copy(nodePos('array'));
       grp.userData = { kind:'node', id:'array', wired:false };
       scene.add(grp); wireNodes.push(grp);
       const lbl = makeLabel('PV Array', '#cfe2ff'); lbl.position.copy(nodePos('array')).add(new THREE.Vector3(0,0.72,0));
-      scene.add(lbl); grp.userData.lbl = lbl;
+      lbl.userData = { kind:'nodeLabel', node: grp }; scene.add(lbl); grp.userData.lbl = lbl; labels.push(lbl);
       continue;
     }
     const box = makeComponent(spec);
@@ -691,7 +707,7 @@ function buildWireNodes(){
     const lbl = makeLabel(spec.label, '#ffffff');
     const hiLab = (spec.id === 'dciso' || spec.id === 'aciso');
     lbl.position.copy(nodePos(spec.id)).add(new THREE.Vector3(0, hiLab ? 1.35 : 0.52, 0));
-    scene.add(lbl); box.userData.lbl = lbl;
+    lbl.userData = { kind:'nodeLabel', node: box }; scene.add(lbl); box.userData.lbl = lbl; labels.push(lbl);
   }
   // battery (context, auto-wired at commissioning)
   const batt = makeComponent({ id:'batt', label:'Battery', color:'#2f9e8f' }, 0.9, 1.4, 0.5);
@@ -700,7 +716,8 @@ function buildWireNodes(){
   const bl = makeLabel('Battery', '#bff0e6'); bl.position.set(-1.0, 1.55, HOUSE.D/2 + 0.06); scene.add(bl);
   // let users click the actual PV panels to make the array connection too
   for (const p of placedPanels){ p.userData.kind = 'node'; p.userData.id = 'array'; }
-  pickables = wireNodes.slice().concat(placedPanels);
+  // clickable set: component boxes + their text labels + the PV panels
+  pickables = wireNodes.slice().concat(labels).concat(placedPanels);
 }
 function makeComponent(spec, w=0.7, h=0.95, d=0.45){
   const grp = new THREE.Group();
@@ -708,6 +725,10 @@ function makeComponent(spec, w=0.7, h=0.95, d=0.45){
   const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d),
     new THREE.MeshStandardMaterial({ color: col, roughness:.6, metalness:.15, emissive: 0x000000 }));
   body.castShadow = true; grp.add(body);
+  // modest invisible hitbox: easier to click, but small enough not to overlap neighbours
+  const hit = new THREE.Mesh(new THREE.BoxGeometry(w+0.3, h+0.45, d+0.35),
+    new THREE.MeshBasicMaterial({ transparent:true, opacity:0, depthWrite:false }));
+  hit.userData.isHit = true; grp.add(hit);
   if (spec.id === 'dciso' || spec.id === 'aciso'){
     const handle = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.32, 0.12),
       new THREE.MeshStandardMaterial({ color: 0xb11f4b }));
@@ -906,13 +927,48 @@ function hideNext(){ document.getElementById('insBtns').innerHTML=''; }
 /* ===================== Interaction ===================== */
 let downPos = null;
 function onPointerDown(e){ downPos = { x:e.clientX, y:e.clientY }; }
+// Project a 3D object to client (CSS) pixel coords, or null if behind the camera.
+function projectToClient(obj){
+  const v = new THREE.Vector3(); obj.getWorldPosition(v); v.project(camera);
+  if (v.z > 1) return null;
+  const r = renderer.domElement.getBoundingClientRect();
+  return { x: r.left + (v.x*0.5+0.5)*r.width, y: r.top + (-v.y*0.5+0.5)*r.height };
+}
+// Phase-3 picking by screen-space proximity to each component's box OR its label.
+// Immune to 3D depth-occlusion (a farther component's centre hiding behind a
+// nearer one) which made exact raycasting feel like "nothing happens".
+function nearestWireNode(cx, cy){
+  let best = null, bestD = Infinity;
+  const consider = (node, obj)=>{
+    const p = projectToClient(obj); if (!p) return;
+    const d = Math.hypot(cx - p.x, cy - p.y);
+    if (d < bestD){ bestD = d; best = node; }
+  };
+  for (const n of wireNodes){
+    consider(n, n);
+    if (n.userData.lbl) consider(n, n.userData.lbl);
+  }
+  // PV panels double as the 'array' target (forgiveness) until the array is wired
+  if (!state.arrayWired){
+    const arr = wireNodes.find(n=>n.userData.id === 'array');
+    if (arr) for (const p of placedPanels) consider(arr, p);
+  }
+  return (best && bestD <= 120) ? best : null;
+}
 function onPointerUp(e){
   if (!downPos) return;
   const moved = Math.hypot(e.clientX-downPos.x, e.clientY-downPos.y);
   downPos = null;
   if (moved > 9) return;            // was an orbit drag
-  pointer.x = (e.clientX/innerWidth)*2 - 1;
-  pointer.y = -(e.clientY/innerHeight)*2 + 1;
+  // Phase 3: resolve to the nearest wire component in screen space (occlusion-proof).
+  if (state.phase === 3){
+    const wn = nearestWireNode(e.clientX, e.clientY);
+    if (wn){ clickNode(wn); return; }
+  }
+  // map to NDC using the canvas rect (robust to any offset / sizing)
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
   raycaster.setFromCamera(pointer, camera);
   const hits = raycaster.intersectObjects(pickables, true);
   if (!hits.length) return;
@@ -925,6 +981,7 @@ function onPointerUp(e){
   if (kind === 'roofFace') chooseFace(reg.userData.dir);
   else if (kind === 'slot') toggleSlot(reg);
   else if (kind === 'node') clickNode(reg);
+  else if (kind === 'nodeLabel') clickNode(reg.userData.node);
 }
 
 /* ===================== Camera tween ===================== */
@@ -976,6 +1033,7 @@ function animate(){
 function onResize(){
   camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
+  if (state.phase === 3){ const p = phase3CamPose(); tweenCamera(p.pos, p.target, 0.4); }
 }
 
 /* ===================== Boot ===================== */
@@ -1015,15 +1073,41 @@ window.__game = {
   energize(){ startPhase4(); },
   fastForward(){ if (sim){ for (let i=0;i<240 && sim && !sim.done;i++){ updateSim(sim.dur/240); } } },
   results(){ showResults(); },
-  // --- real-click test helpers (project a node/panel to client pixel coords) ---
+  // --- real-click test helpers (project a node/panel/label to client pixel coords) ---
   screenOf(id){
     const n = (id==='panel') ? placedPanels[0] : wireNodes.find(n=>n.userData.id===id);
     if(!n) return null;
     const v = new THREE.Vector3(); n.getWorldPosition(v); v.project(camera);
-    return { x:(v.x*0.5+0.5)*window.innerWidth, y:(-v.y*0.5+0.5)*window.innerHeight, behind:v.z>1 };
+    const r = renderer.domElement.getBoundingClientRect();
+    return { x:r.left+(v.x*0.5+0.5)*r.width, y:r.top+(-v.y*0.5+0.5)*r.height, behind:v.z>1 };
+  },
+  labelOf(id){
+    const n = wireNodes.find(n=>n.userData.id===id);
+    const lbl = n && n.userData.lbl;
+    if(!lbl) return null;
+    const v = new THREE.Vector3(); lbl.getWorldPosition(v); v.project(camera);
+    const r = renderer.domElement.getBoundingClientRect();
+    return { x:r.left+(v.x*0.5+0.5)*r.width, y:r.top+(-v.y*0.5+0.5)*r.height, behind:v.z>1 };
   },
   wireState(){ return { idx: state.wireIndex, mistakes: state.wireMistakes, arrayWired: state.arrayWired,
     wired: wireNodes.map(n=>({ id:n.userData.id, wired:!!n.userData.wired })) }; },
+  pick(cx, cy){
+    const r = renderer.domElement.getBoundingClientRect();
+    pointer.x = ((cx - r.left)/r.width)*2 - 1; pointer.y = -((cy - r.top)/r.height)*2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObjects(pickables, true);
+    return hits.slice(0,4).map(h=>{ let o=h.object, reg=null; while(o){ if(pickables.includes(o)){reg=o;break;} o=o.parent; }
+      const u=(reg||h.object).userData||{}; return { d:+h.distance.toFixed(2), kind:u.kind, id:u.id||(u.node&&u.node.userData.id) }; });
+  },
+  clickWorld(id, useLabel){
+    const t = useLabel ? this.labelOf(id) : this.screenOf(id);
+    if (!t) return false;
+    const el = renderer.domElement;
+    const o = { clientX: t.x, clientY: t.y, bubbles: true, pointerId: 1, isPrimary: true, pointerType: 'mouse' };
+    el.dispatchEvent(new PointerEvent('pointerdown', o));
+    el.dispatchEvent(new PointerEvent('pointerup', o));
+    return true;
+  },
   ready: true
 };
 </script>
