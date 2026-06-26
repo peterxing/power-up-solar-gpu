@@ -649,14 +649,14 @@ function startPhase3(){
   setInstruction('PHASE 3 · WIRE IT SAFELY', 'Connect the energy path',
     'Click the components in the correct order the energy flows — from the panels to the grid. Isolators each side of the inverter let you switch off safely (AS/NZS 5033 &amp; 4777).', []);
   buildWireNodes();
-  state.wireIndex = 0; state.wireMistakes = 0;
+  state.wireIndex = 0; state.wireMistakes = 0; state.arrayWired = false;
   setLive('Next: click the PV Array to start.', '');
   tweenCamera(new THREE.Vector3(8.5, 5.6, 14), new THREE.Vector3(0.4, 2.5, 2.2), 1.2);
 }
 function nodePos(id){
   const D = HOUSE.D/2 + 0.06;
   switch(id){
-    case 'array': return new THREE.Vector3(0, 3.9, 1.6);
+    case 'array': return new THREE.Vector3(-0.6, 3.15, 2.95);
     case 'dciso': return new THREE.Vector3(-2.4, 2.3, D);
     case 'inv':   return new THREE.Vector3(-1.0, 1.7, D);
     case 'aciso': return new THREE.Vector3(0.4, 2.3, D);
@@ -669,14 +669,19 @@ function buildWireNodes(){
   wireNodes = [];
   for (const spec of WIRE_SEQ){
     if (spec.id === 'array'){
-      // invisible clickable marker on roof + use panels visually
-      const m = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.4, 0.3),
-        new THREE.MeshBasicMaterial({ color: 0x7da7d9, transparent:true, opacity:0.0 }));
-      m.position.copy(nodePos('array'));
-      m.userData = { kind:'node', id:'array', wired:false };
-      scene.add(m); wireNodes.push(m);
-      const lbl = makeLabel('PV Array', '#cfe2ff'); lbl.position.copy(nodePos('array')).add(new THREE.Vector3(0,1.0,0));
-      scene.add(lbl); m.userData.lbl = lbl;
+      // visible combiner/junction box where panel cabling gathers (clearly clickable + pulses)
+      const grp = new THREE.Group();
+      const body = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.62, 0.3),
+        new THREE.MeshStandardMaterial({ color: 0x2a3f63, roughness:.55, metalness:.2, emissive: 0x000000 }));
+      body.castShadow = true; grp.add(body);
+      const conduit = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.5, 8),
+        new THREE.MeshStandardMaterial({ color: 0xc2c7cf, metalness:.3, roughness:.5 }));
+      conduit.position.set(0.18, -0.5, 0); grp.add(conduit);
+      grp.position.copy(nodePos('array'));
+      grp.userData = { kind:'node', id:'array', wired:false };
+      scene.add(grp); wireNodes.push(grp);
+      const lbl = makeLabel('PV Array', '#cfe2ff'); lbl.position.copy(nodePos('array')).add(new THREE.Vector3(0,0.72,0));
+      scene.add(lbl); grp.userData.lbl = lbl;
       continue;
     }
     const box = makeComponent(spec);
@@ -693,7 +698,9 @@ function buildWireNodes(){
   batt.position.set(-1.0, 0.75, HOUSE.D/2 + 0.06);
   scene.add(batt); window._battMesh = batt;
   const bl = makeLabel('Battery', '#bff0e6'); bl.position.set(-1.0, 1.55, HOUSE.D/2 + 0.06); scene.add(bl);
-  pickables = wireNodes.slice();
+  // let users click the actual PV panels to make the array connection too
+  for (const p of placedPanels){ p.userData.kind = 'node'; p.userData.id = 'array'; }
+  pickables = wireNodes.slice().concat(placedPanels);
 }
 function makeComponent(spec, w=0.7, h=0.95, d=0.45){
   const grp = new THREE.Group();
@@ -715,6 +722,8 @@ function clearWireNodes(){
 function clickNode(node){
   if (state.phase !== 3) return;
   const id = node.userData.id;
+  if (node.userData.wired) return;                 // already connected — ignore repeat clicks
+  if (id === 'array' && state.arrayWired) return;   // array done; panels stay clickable but harmless
   const expected = WIRE_SEQ[state.wireIndex].id;
   if (id !== expected){
     state.wireMistakes++; state.score = Math.max(0, state.score - 25); setScore();
@@ -724,6 +733,7 @@ function clickNode(node){
     toast('Wrong order', 'bad');
     return;
   }
+  if (id === 'array') state.arrayWired = true;
   node.userData.wired = true;
   lightNode(node);
   if (state.wireIndex > 0){ drawWire(wireNodes[state.wireIndex-1], node); }
@@ -741,7 +751,12 @@ function clickNode(node){
 function lightNode(node){
   const body = node.children && node.children[0];
   if (body && body.material && body.material.emissive){ body.material.emissive.setHex(0x14361f); }
-  if (node.userData.id === 'array'){ for (const p of placedPanels){ p.userData.glass.material.emissive.setHex(0x123a6b); } }
+  if (node.userData.id === 'array'){
+    for (const p of placedPanels){ if (p.userData.glass) p.userData.glass.material.emissive.setHex(0x123a6b); }
+    const jb = wireNodes[0], jbody = jb && jb.children && jb.children[0];
+    if (jbody && jbody.material && jbody.material.emissive){ jbody.material.emissive.setHex(0x14361f); }
+    if (jb) jb.userData.wired = true;
+  }
 }
 function flashNode(node, hex){
   const body = node.children && node.children[0];
@@ -895,7 +910,7 @@ function onPointerUp(e){
   if (!downPos) return;
   const moved = Math.hypot(e.clientX-downPos.x, e.clientY-downPos.y);
   downPos = null;
-  if (moved > 6) return;            // was an orbit drag
+  if (moved > 9) return;            // was an orbit drag
   pointer.x = (e.clientX/innerWidth)*2 - 1;
   pointer.y = -(e.clientY/innerHeight)*2 + 1;
   raycaster.setFromCamera(pointer, camera);
@@ -1000,6 +1015,15 @@ window.__game = {
   energize(){ startPhase4(); },
   fastForward(){ if (sim){ for (let i=0;i<240 && sim && !sim.done;i++){ updateSim(sim.dur/240); } } },
   results(){ showResults(); },
+  // --- real-click test helpers (project a node/panel to client pixel coords) ---
+  screenOf(id){
+    const n = (id==='panel') ? placedPanels[0] : wireNodes.find(n=>n.userData.id===id);
+    if(!n) return null;
+    const v = new THREE.Vector3(); n.getWorldPosition(v); v.project(camera);
+    return { x:(v.x*0.5+0.5)*window.innerWidth, y:(-v.y*0.5+0.5)*window.innerHeight, behind:v.z>1 };
+  },
+  wireState(){ return { idx: state.wireIndex, mistakes: state.wireMistakes, arrayWired: state.arrayWired,
+    wired: wireNodes.map(n=>({ id:n.userData.id, wired:!!n.userData.wired })) }; },
   ready: true
 };
 </script>
